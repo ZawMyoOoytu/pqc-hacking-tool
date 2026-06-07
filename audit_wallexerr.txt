@@ -1,0 +1,214 @@
+[*] Scanning: wallexerr
+============================================================
+PQC HACKING TOOL - SECURITY ASSESSMENT REPORT
+Scan Date: 2026-06-07 10:06:30
+============================================================
+
+[*] wallexerr\src\lib.rs
+
+    [!] CRITICAL | Line 40
+    Algorithm: RSA
+    Context: |   RSA (Asymmetric) Crypto Wallet Implementations using ECC Curves
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 12
+    Algorithm: ECDSA
+    Context: use secp256k1::ecdsa::Signature;
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 45
+    Algorithm: ECDSA
+    Context: | secp256k1 -> ECDSA                                ::::::: secp256k1
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 46
+    Algorithm: ECDSA
+    Context: | secp256r1 -> ECDSA                                ::::::: themis
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 269
+    Algorithm: ECDSA
+    Context: /* ECDSA keypairs */
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 270
+    Algorithm: ECDSA
+    Context: let ec_key_pair = gen_ec_key_pair(); // generates a pair of Elliptic Curve (ECDSA) keys
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 640
+    Algorithm: ECDSA
+    Context: /* building ECDSA keypair from pubkey and prvkey slices */
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 658
+    Algorithm: ECDSA
+    Context: /* building ECDSA keypair from pubkey and prvkey slices */
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 44
+    Algorithm: Ed25519
+    Context: | ed25519   -> EdDSA                                ::::::: ring
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 50
+    Algorithm: Ed25519
+    Context: | ed25519   -> ring_rand::SystemRandom
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 56
+    Algorithm: Ed25519
+    Context: | ed25519   -> base58(used)/base64(tested)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 182
+    Algorithm: Ed25519
+    Context: /* generating ed25519 keypair */
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 186
+    Algorithm: Ed25519
+    Context: /* ED25519 keypair */
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 295
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 298
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 313
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 316
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 332
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 335
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 351
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 354
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 370
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 373
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 394
+    Algorithm: Ed25519
+    Context: let ed25519 = Self::retrieve_ed25519_keypair(prvkey);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 397
+    Algorithm: Ed25519
+    Context: let signature = ed25519.sign(&hash_data_bytes);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 445
+    Algorithm: Ed25519
+    Context: &ring_signature::ED25519,
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 468
+    Algorithm: Ed25519
+    Context: &ring_signature::ED25519,
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 1124
+    Algorithm: Ed25519
+    Context: Wallet::save_to_json(&contract.wallet, "ed25519").unwrap();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 1173
+    Algorithm: Ed25519
+    Context: Wallet::save_to_json(&contract.wallet, "ed25519").unwrap();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 1241
+    Algorithm: Ed25519
+    Context: Wallet::save_to_json(&contract.wallet, "ed25519").unwrap();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] wallexerr\README.md
+
+    [!] CRITICAL | Line 9
+    Algorithm: ECDSA
+    Context: - secp256r1 -> ECDSA
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 7
+    Algorithm: Ed25519
+    Context: - ed25519   -> EdDSA
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 43
+    Algorithm: Ed25519
+    Context: cargo test ed25519_test # test ed25519 wallet
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+============================================================
+SUMMARY: 2 files affected | 33 total risks
+
+[!!!] CRITICAL: 9 quantum-vulnerable findings!
+    Immediate migration to NIST PQC standards required.
+============================================================

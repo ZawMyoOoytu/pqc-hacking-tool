@@ -1,0 +1,68 @@
+[*] Scanning: webpayments-crypto
+============================================================
+PQC HACKING TOOL - SECURITY ASSESSMENT REPORT
+Scan Date: 2026-06-07 10:06:30
+============================================================
+
+[*] webpayments-crypto\payment-encryption.md
+
+    [!] CRITICAL | Line 27
+    Algorithm: RSA
+    Context: **Algorithm**: RSA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 57
+    Algorithm: RSA
+    Context: "alg":"RSA-OAEP-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 63
+    Algorithm: RSA
+    Context: Encrypted Key will be random generated CEK encrypted with RSA public key.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 91
+    Algorithm: RSA
+    Context: keyGenerator = KeyPairGenerator.getInstance("RSA");
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 122
+    Algorithm: RSA
+    Context: // Request JWT encrypted with RSA-OAEP-256 and 128-bit AES/GCM
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 128
+    Algorithm: RSA
+    Context: // Create an encrypter with the specified public RSA key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 144
+    Algorithm: RSA
+    Context: Decryption using RSA private key.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 150
+    Algorithm: RSA
+    Context: // Create a decrypter with the specified private RSA key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 167
+    Algorithm: RSA
+    Context: * Nimbus (Connect2id) Example : https://connect2id.com/products/nimbus-jose-jwt/examples/jwt-with-rs
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+============================================================
+SUMMARY: 1 files affected | 9 total risks
+
+[!!!] CRITICAL: 9 quantum-vulnerable findings!
+    Immediate migration to NIST PQC standards required.
+============================================================

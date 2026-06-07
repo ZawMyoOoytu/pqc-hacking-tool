@@ -1,0 +1,484 @@
+[*] Scanning: quid
+============================================================
+PQC HACKING TOOL - SECURITY ASSESSMENT REPORT
+Scan Date: 2026-06-07 10:06:30
+============================================================
+
+[*] quid\cmd\quid\conf.go
+
+    [W] HIGH | Line 38
+    Algorithm: AES-128
+    Context: log.Info(`No "config.json" file. Note: flag -conf generates a "config.json" file with a random AES-1
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] quid\cmd\quid\main.go
+
+    [W] HIGH | Line 18
+    Algorithm: AES-128
+    Context: // defaultKey is AES-128-bits (16 bytes) in hexadecimal form (32 digits).
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 41
+    Algorithm: AES-128
+    Context: key     = flag.String("key", gg.EnvStr("QUID_KEY", defaultKey), "AES-128 key to encrypt the private 
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 44
+    Algorithm: AES-128
+    Context: conf    = flag.Bool("conf", false, `Generate a "config.json" file with a random AES-128 key`)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 129
+    Algorithm: AES-128
+    Context: log.Info(`Generating "config.json" file with random AES-128 key`)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 145
+    Algorithm: AES-128
+    Context: log.Fatal("Want AES-128 key in hexadecimal (32 digits) or Base64 (unpadded 22 characters, RFC 4648 §
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] quid\tokens\tokens.go
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: "crypto/rsa"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 147
+    Algorithm: RSA
+    Context: // or the public key for asymmetric algos (like RSA, EdDSA).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 181
+    Algorithm: RSA
+    Context: case "RS256", "RS384", "RS512": // RSA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 188
+    Algorithm: RSA
+    Context: case "PS256", "PS384", "PS512": // RSA + salt
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 239
+    Algorithm: RSA
+    Context: // RSA: 2048 bits to prevent the error "message too long for RSA public key size"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 239
+    Algorithm: RSA
+    Context: // RSA: 2048 bits to prevent the error "message too long for RSA public key size"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 243
+    Algorithm: RSA
+    Context: // RSA + salt
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 301
+    Algorithm: RSA
+    Context: // GenerateKeyRSA generates a random RSA private key in DER format.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 303
+    Algorithm: RSA
+    Context: private, err := rsa.GenerateKey(rand.Reader, bits)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 305
+    Algorithm: RSA
+    Context: log.Panicf("rsa.GenerateKey(rand.Reader, bits=%d): %v", bits, err)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 4
+    Algorithm: ECDSA
+    Context: "crypto/ecdsa"
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 223
+    Algorithm: ECDSA
+    Context: // - ES256 = ECDSA using P-256 and SHA-256
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 224
+    Algorithm: ECDSA
+    Context: // - ES384 = ECDSA using P-384 and SHA-384
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 225
+    Algorithm: ECDSA
+    Context: // - ES512 = ECDSA using P-521 and SHA-512
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 310
+    Algorithm: ECDSA
+    Context: // GenerateKeyECDSA generates a random ECDSA private key in DER format.
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 312
+    Algorithm: ECDSA
+    Context: private, err := ecdsa.GenerateKey(c, rand.Reader)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 314
+    Algorithm: ECDSA
+    Context: log.Panicf("ecdsa.GenerateKey(%s): %v", c.Params().Name, err)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 5
+    Algorithm: Ed25519
+    Context: "crypto/ed25519"
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 124
+    Algorithm: Ed25519
+    Context: return ed25519.PrivateKey(keyDER), nil
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 199
+    Algorithm: Ed25519
+    Context: private := ed25519.PrivateKey(der)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 226
+    Algorithm: Ed25519
+    Context: // - EdDSA = Ed25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 327
+    Algorithm: Ed25519
+    Context: _, private, err := ed25519.GenerateKey(nil)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] quid\tokens\tokens_test.go
+
+    [!] CRITICAL | Line 91
+    Algorithm: ECDSA
+    Context: name:       "ES256=ECDSA-P256-SHA256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 101
+    Algorithm: ECDSA
+    Context: name:       "ES384=ECDSA-P384-SHA384",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 111
+    Algorithm: ECDSA
+    Context: name:       "ES512=ECDSA-P521-SHA512",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 121
+    Algorithm: Ed25519
+    Context: name:       "EdDSA=Ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] quid\tokens\verifier.go
+
+    [!] CRITICAL | Line 6
+    Algorithm: ECDSA
+    Context: "crypto/ecdsa"
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 156
+    Algorithm: ECDSA
+    Context: type ECDSA struct {
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 158
+    Algorithm: ECDSA
+    Context: key *ecdsa.PublicKey
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 166
+    Algorithm: ECDSA
+    Context: ES256 struct{ ECDSA }
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 167
+    Algorithm: ECDSA
+    Context: ES384 struct{ ECDSA }
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 168
+    Algorithm: ECDSA
+    Context: ES512 struct{ ECDSA }
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 181
+    Algorithm: ECDSA
+    Context: ErrES256PubKey  = errors.New("cannot decode the ECDSA-P256-SHA256 public key, please provide 182 hex
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 182
+    Algorithm: ECDSA
+    Context: ErrES384PubKey  = errors.New("cannot decode the ECDSA-P384-SHA384 public key, please provide 240 hex
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 183
+    Algorithm: ECDSA
+    Context: ErrES512PubKey  = errors.New("cannot decode the ECDSA-P512-SHA512 public key, please provide 316 hex
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 184
+    Algorithm: ECDSA
+    Context: ErrECDSAPubKey  = errors.New("cannot parse the DER bytes as a valid ECDSA public key")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 267
+    Algorithm: ECDSA
+    Context: ecPubKey, ok := pub.(*ecdsa.PublicKey)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 271
+    Algorithm: ECDSA
+    Context: return &ES256{ECDSA{Base{reuse}, ecPubKey}}, nil
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 283
+    Algorithm: ECDSA
+    Context: ecPubKey, ok := pub.(*ecdsa.PublicKey)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 287
+    Algorithm: ECDSA
+    Context: return &ES384{ECDSA{Base{reuse}, ecPubKey}}, nil
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 299
+    Algorithm: ECDSA
+    Context: ecPubKey, ok := pub.(*ecdsa.PublicKey)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 303
+    Algorithm: ECDSA
+    Context: return &ES512{ECDSA{Base{reuse}, ecPubKey}}, nil
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 346
+    Algorithm: ECDSA
+    Context: func (v *ECDSA) verify(digest hash.Hash, headerPayload, sig []byte) bool {
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 354
+    Algorithm: ECDSA
+    Context: return ecdsa.Verify(v.key, digest.Sum(nil), r, s)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 367
+    Algorithm: ECDSA
+    Context: func (v *ECDSA) verifySlower(digest hash.Hash, headerPayload, sig []byte) bool {
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 373
+    Algorithm: ECDSA
+    Context: return ecdsa.VerifyASN1(v.key, digest.Sum(nil), sig)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 7
+    Algorithm: Ed25519
+    Context: "crypto/ed25519"
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 251
+    Algorithm: Ed25519
+    Context: edPubKey, ok := pub.(ed25519.PublicKey)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 362
+    Algorithm: Ed25519
+    Context: return ed25519.Verify(v.key, headerPayload, sig)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] quid\README.md
+
+    [!] CRITICAL | Line 12
+    Algorithm: RSA
+    Context: - RS256 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-256
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 13
+    Algorithm: RSA
+    Context: - RS384 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-384
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 14
+    Algorithm: RSA
+    Context: - RS512 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-512
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 15
+    Algorithm: ECDSA
+    Context: - ES256 = ECDSA using P-256 and SHA-256
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 16
+    Algorithm: ECDSA
+    Context: - ES384 = ECDSA using P-384 and SHA-384
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 17
+    Algorithm: ECDSA
+    Context: - ES512 = ECDSA using P-521 and SHA-512
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 18
+    Algorithm: Ed25519
+    Context: - EdDSA = Ed25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] quid\docs\apidoc\overview.md
+
+    [!] CRITICAL | Line 10
+    Algorithm: RSA
+    Context: - RS256 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-256
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: - RS384 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-384
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 12
+    Algorithm: RSA
+    Context: - RS512 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-512
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 13
+    Algorithm: ECDSA
+    Context: - ES256 = ECDSA using P-256 and SHA-256
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 14
+    Algorithm: ECDSA
+    Context: - ES384 = ECDSA using P-384 and SHA-384
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 15
+    Algorithm: ECDSA
+    Context: - ES512 = ECDSA using P-521 and SHA-512
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 16
+    Algorithm: Ed25519
+    Context: - EdDSA = Ed25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] quid\docsite\public\apidoc\overview.md
+
+    [!] CRITICAL | Line 10
+    Algorithm: RSA
+    Context: - RS256 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-256
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: - RS384 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-384
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 12
+    Algorithm: RSA
+    Context: - RS512 = RSASSA-PKCS1-v1_5 using 2048-bits RSA key and SHA-512
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 13
+    Algorithm: ECDSA
+    Context: - ES256 = ECDSA using P-256 and SHA-256
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 14
+    Algorithm: ECDSA
+    Context: - ES384 = ECDSA using P-384 and SHA-384
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 15
+    Algorithm: ECDSA
+    Context: - ES512 = ECDSA using P-521 and SHA-512
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 16
+    Algorithm: Ed25519
+    Context: - EdDSA = Ed25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+============================================================
+SUMMARY: 8 files affected | 76 total risks
+
+[!!!] CRITICAL: 58 quantum-vulnerable findings!
+    Immediate migration to NIST PQC standards required.
+============================================================
