@@ -1,0 +1,2 @@
+[*] Scanning: django
+No quantum-vulnerable cryptography found.

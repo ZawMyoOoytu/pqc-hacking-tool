@@ -1,0 +1,2356 @@
+[*] Scanning: paramiko
+============================================================
+PQC HACKING TOOL - SECURITY ASSESSMENT REPORT
+Scan Date: 2026-06-07 10:16:08
+============================================================
+
+[*] paramiko\paramiko\agent.py
+
+    [!] CRITICAL | Line 53
+    Algorithm: RSA
+    Context: "rsa-sha2-256": SSH_AGENT_RSA_SHA2_256,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 54
+    Algorithm: RSA
+    Context: "rsa-sha2-512": SSH_AGENT_RSA_SHA2_512,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 460
+    Algorithm: RSA
+    Context: # Prefer inner_key.asbytes, since that will differ for eg RSA-CERT
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 489
+    Algorithm: RSA
+    Context: # RSA-CERT 'keys' - those end up always degrading to ssh-rsa type
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 489
+    Algorithm: RSA
+    Context: # RSA-CERT 'keys' - those end up always degrading to ssh-rsa type
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\paramiko\auth_handler.py
+
+    [!] CRITICAL | Line 266
+    Algorithm: RSA
+    Context: For RSA, this will be one of the SHA2 algorithms, depending on our
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 269
+    Algorithm: RSA
+    Context: # Short-circuit for non-RSA keys
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 270
+    Algorithm: RSA
+    Context: if "rsa" not in key_type:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 279
+    Algorithm: RSA
+    Context: # Only consider RSA algos from our list, lest we agree on another!
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 280
+    Algorithm: RSA
+    Context: my_algos = [x for x in self.transport.preferred_pubkeys if "rsa" in x]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 282
+    Algorithm: RSA
+    Context: # Short-circuit negatively if user disabled all RSA algos (heh)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 285
+    Algorithm: RSA
+    Context: "An RSA key was specified, but no RSA pubkey algorithms are configured!"  # noqa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 285
+    Algorithm: RSA
+    Context: "An RSA key was specified, but no RSA pubkey algorithms are configured!"  # noqa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 318
+    Algorithm: RSA
+    Context: msg = f"Server did not send a server-sig-algs list; defaulting to first RSA algorithm in our list: {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 473
+    Algorithm: RSA
+    Context: # fields but still ssh-rsa within the pubkey blob part?
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 474
+    Algorithm: RSA
+    Context: # TODO: ok so this would be rsa-sha2-256 or w/e, if this field says
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 475
+    Algorithm: RSA
+    Context: # ssh-rsa the request can get stuffed.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 478
+    Algorithm: RSA
+    Context: # "ssh-rsa" in its first field.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 714
+    Algorithm: RSA
+    Context: # NOTE: key_type here may be just key type ("rsa-sha2-256") or may be
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 715
+    Algorithm: RSA
+    Context: # the cert form if cert was loaded ("ssh-rsa-cert-v01@openssh.com")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\paramiko\client.py
+
+    [!] CRITICAL | Line 420
+    Algorithm: RSA
+    Context: # TODO: keytype needs to turn into one of the rsa-sha2 keys if it's
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 430
+    Algorithm: RSA
+    Context: if keytype == "ssh-rsa":
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 431
+    Algorithm: RSA
+    Context: if "rsa-sha2-512" in sec_opts.key_types:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 432
+    Algorithm: RSA
+    Context: keytype = "rsa-sha2-512"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 433
+    Algorithm: RSA
+    Context: elif "rsa-sha2-256" in sec_opts.key_types:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 434
+    Algorithm: RSA
+    Context: keytype = "rsa-sha2-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 453
+    Algorithm: RSA
+    Context: # offering an ssh-rsa-via-sha2 key as "ssh-rsa" still, and the
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 453
+    Algorithm: RSA
+    Context: # offering an ssh-rsa-via-sha2 key as "ssh-rsa" still, and the
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 455
+    Algorithm: RSA
+    Context: # "ssh-rsa")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 729
+    Algorithm: RSA
+    Context: (RSAKey, "rsa"),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 730
+    Algorithm: ECDSA
+    Context: (ECDSAKey, "ecdsa"),
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 731
+    Algorithm: Ed25519
+    Context: (Ed25519Key, "ed25519"),
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\paramiko\ecdsakey.py
+
+    [!] CRITICAL | Line 20
+    Algorithm: ECDSA
+    Context: ECDSA keys
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 43
+    Algorithm: ECDSA
+    Context: Represents a specific ECDSA Curve (nistp256, nistp384, etc).
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 46
+    Algorithm: ECDSA
+    Context: the proper hash function. Also grabs the proper curve from the 'ecdsa'
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 55
+    Algorithm: ECDSA
+    Context: self.key_format_identifier = "ecdsa-sha2-" + self.nist_name
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 70
+    Algorithm: ECDSA
+    Context: A collection to hold the ECDSA curves. Allows querying by oid and by key
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 99
+    Algorithm: ECDSA
+    Context: Representation of an ECDSA key which can be used to sign and verify SSH2
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 224
+    Algorithm: ECDSA
+    Context: ecdsa = ec.ECDSA(self.ecdsa_curve.hash_object())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 224
+    Algorithm: ECDSA
+    Context: ecdsa = ec.ECDSA(self.ecdsa_curve.hash_object())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 225
+    Algorithm: ECDSA
+    Context: sig = self.signing_key.sign(data, ecdsa)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 242
+    Algorithm: ECDSA
+    Context: signature, data, ec.ECDSA(self.ecdsa_curve.hash_object())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 256
+    Algorithm: ECDSA
+    Context: Generate a new private ECDSA key.  This factory function can be used to
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 301
+    Algorithm: ECDSA
+    Context: name = "ecdsa-sha2-" + curve_name
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+[*] paramiko\paramiko\ed25519key.py
+
+    [W] HIGH | Line 32
+    Algorithm: Ed25519
+    Context: Representation of an `Ed25519 <https://ed25519.cr.yp.to/>`_ key.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 32
+    Algorithm: Ed25519
+    Context: Representation of an `Ed25519 <https://ed25519.cr.yp.to/>`_ key.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 35
+    Algorithm: Ed25519
+    Context: Ed25519 key support was added to OpenSSH in version 6.5.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 42
+    Algorithm: Ed25519
+    Context: name = "ssh-ed25519"
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 55
+    Algorithm: Ed25519
+    Context: cert_type="ssh-ed25519-cert-v01@openssh.com",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 74
+    Algorithm: Ed25519
+    Context: # OpenSSH moves to it, but for now this is just for Ed25519 keys.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\paramiko\kex_ecdh_nist.py
+
+    [!] CRITICAL | Line 2
+    Algorithm: ECDH
+    Context: Ephemeral Elliptic Curve Diffie-Hellman (ECDH) key exchange
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 21
+    Algorithm: ECDH
+    Context: name = "ecdh-sha2-nistp256"
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 71
+    Algorithm: ECDH
+    Context: K = self.P.exchange(ec.ECDH(), self.Q_C)
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 117
+    Algorithm: ECDH
+    Context: K = self.P.exchange(ec.ECDH(), self.Q_S)
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 143
+    Algorithm: ECDH
+    Context: name = "ecdh-sha2-nistp384"
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 149
+    Algorithm: ECDH
+    Context: name = "ecdh-sha2-nistp521"
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+[*] paramiko\paramiko\pkey.py
+
+    [!] CRITICAL | Line 41
+    Algorithm: RSA
+    Context: from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 149
+    Algorithm: RSA
+    Context: BEGIN_TAG = re.compile(r"^-{5}BEGIN (RSA|EC|OPENSSH) PRIVATE KEY-{5}\s*$")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 150
+    Algorithm: RSA
+    Context: END_TAG = re.compile(r"^-{5}END (RSA|EC|OPENSSH) PRIVATE KEY-{5}\s*$")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 212
+    Algorithm: RSA
+    Context: if isinstance(loaded, asymmetric.rsa.RSAPrivateKey):
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 338
+    Algorithm: RSA
+    Context: example, ``"ssh-rsa"``).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 553
+    Algorithm: RSA
+    Context: ``"RSA"`` (or etc), the tag used to mark the data block.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 928
+    Algorithm: RSA
+    Context: # {ssh-rsa, ssh-ecdsa, ssh-ed25519}, but should
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 948
+    Algorithm: RSA
+    Context: :param str type_: Type indicator, eg ``ssh-rsa``.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 357
+    Algorithm: ECDSA
+    Context: # Nuke any eg ECDSA suffix, OpenSSH does basically this too.
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 852
+    Algorithm: ECDSA
+    Context: it was (e.g. ECDSA.)
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 855
+    Algorithm: ECDSA
+    Context: # but eg ECDSA is a 1:N mapping.
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 928
+    Algorithm: ECDSA
+    Context: # {ssh-rsa, ssh-ecdsa, ssh-ed25519}, but should
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 40
+    Algorithm: Ed25519
+    Context: from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 214
+    Algorithm: Ed25519
+    Context: elif isinstance(loaded, asymmetric.ed25519.Ed25519PrivateKey):
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 234
+    Algorithm: Ed25519
+    Context: For example, ``PKey.from_type_string("ssh-ed25519", <public bytes>)``
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 238
+    Algorithm: Ed25519
+    Context: The key type, eg ``"ssh-ed25519"``.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 928
+    Algorithm: Ed25519
+    Context: # {ssh-rsa, ssh-ecdsa, ssh-ed25519}, but should
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 128
+    Algorithm: AES-128
+    Context: "AES-128-CBC": {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] paramiko\paramiko\rsakey.py
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: RSA keys.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 28
+    Algorithm: RSA
+    Context: from cryptography.hazmat.primitives.asymmetric import padding, rsa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 37
+    Algorithm: RSA
+    Context: Representation of an RSA key which can be used to sign and verify SSH2
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 41
+    Algorithm: RSA
+    Context: name = "ssh-rsa"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 43
+    Algorithm: RSA
+    Context: "rsa-sha2-256": hashes.SHA256,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 44
+    Algorithm: RSA
+    Context: "rsa-sha2-256-cert-v01@openssh.com": hashes.SHA256,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 45
+    Algorithm: RSA
+    Context: "rsa-sha2-512": hashes.SHA512,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 46
+    Algorithm: RSA
+    Context: "rsa-sha2-512-cert-v01@openssh.com": hashes.SHA512,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 76
+    Algorithm: RSA
+    Context: cert_type="ssh-rsa-cert-v01@openssh.com",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 78
+    Algorithm: RSA
+    Context: self.key = rsa.RSAPublicNumbers(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 84
+    Algorithm: RSA
+    Context: # NOTE: we no longer want to have ssh-rsa+SHA1 in HASHES but we still
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 85
+    Algorithm: RSA
+    Context: # need to advertise we can be used to read ssh-rsa keys (w/ assumption
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 89
+    Algorithm: RSA
+    Context: "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 90
+    Algorithm: RSA
+    Context: "ssh-rsa-cert-v01@openssh.com",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 98
+    Algorithm: RSA
+    Context: def private_key(self) -> Optional[rsa.RSAPrivateKey]:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 99
+    Algorithm: RSA
+    Context: return self.key if isinstance(self.key, rsa.RSAPrivateKey) else None
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 103
+    Algorithm: RSA
+    Context: if isinstance(self.key, rsa.RSAPrivateKey):
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 132
+    Algorithm: RSA
+    Context: return isinstance(self.key, rsa.RSAPrivateKey)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 155
+    Algorithm: RSA
+    Context: if isinstance(key, rsa.RSAPrivateKey):
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 177
+    Algorithm: RSA
+    Context: Generate a new private RSA key.  This factory function can be used to
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 184
+    Algorithm: RSA
+    Context: key = rsa.generate_private_key(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 192
+    Algorithm: RSA
+    Context: data = self._read_private_key_file("RSA", filename, password)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 196
+    Algorithm: RSA
+    Context: data = self._read_private_key("RSA", file_obj, password)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 210
+    Algorithm: RSA
+    Context: public_numbers = rsa.RSAPublicNumbers(e=e, n=n)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 211
+    Algorithm: RSA
+    Context: key = rsa.RSAPrivateNumbers(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 222
+    Algorithm: RSA
+    Context: assert isinstance(key, rsa.RSAPrivateKey)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\paramiko\transport.py
+
+    [!] CRITICAL | Line 202
+    Algorithm: RSA
+    Context: "rsa-sha2-512",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 203
+    Algorithm: RSA
+    Context: "rsa-sha2-256",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 211
+    Algorithm: RSA
+    Context: "rsa-sha2-512",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 212
+    Algorithm: RSA
+    Context: "rsa-sha2-256",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 298
+    Algorithm: RSA
+    Context: # ssh-rsa in not-using-SHA1 contexts?
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 301
+    Algorithm: RSA
+    Context: # - Transport._verify_key - verification - do not want ssh-rsa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 304
+    Algorithm: RSA
+    Context: # transport._preferred_keys), and since the latter doesn't want ssh-rsa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 308
+    Algorithm: RSA
+    Context: # references this structure, so yup, do not want ssh-rsa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 309
+    Algorithm: RSA
+    Context: "rsa-sha2-256": RSAKey,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 310
+    Algorithm: RSA
+    Context: "rsa-sha2-256-cert-v01@openssh.com": RSAKey,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 311
+    Algorithm: RSA
+    Context: "rsa-sha2-512": RSAKey,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 312
+    Algorithm: RSA
+    Context: "rsa-sha2-512-cert-v01@openssh.com": RSAKey,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 786
+    Algorithm: RSA
+    Context: # Handle SHA-2 extensions for RSA by ensuring that lookups into
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 790
+    Algorithm: RSA
+    Context: self.server_key_dict["rsa-sha2-256"] = key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 791
+    Algorithm: RSA
+    Context: self.server_key_dict["rsa-sha2-512"] = key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1317
+    Algorithm: RSA
+    Context: "rsa-sha2-512",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1318
+    Algorithm: RSA
+    Context: "rsa-sha2-256",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1853
+    Algorithm: RSA
+    Context: # TODO: like, here, can a host offer "ssh-rsa" but request SHA2, or are
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 199
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 200
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp384",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 201
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp521",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 208
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 209
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp384",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 210
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp521",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 313
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 314
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256-cert-v01@openssh.com": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 315
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp384": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 316
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp384-cert-v01@openssh.com": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 317
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp521": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 318
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp521-cert-v01@openssh.com": ECDSAKey,
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 198
+    Algorithm: Ed25519
+    Context: "ssh-ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 207
+    Algorithm: Ed25519
+    Context: "ssh-ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 319
+    Algorithm: Ed25519
+    Context: "ssh-ed25519": Ed25519Key,
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 320
+    Algorithm: Ed25519
+    Context: "ssh-ed25519-cert-v01@openssh.com": Ed25519Key,
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [!] CRITICAL | Line 215
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp256",
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 216
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp384",
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 217
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp521",
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 327
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp256": KexNistp256,
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 328
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp384": KexNistp384,
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+    [!] CRITICAL | Line 329
+    Algorithm: ECDH
+    Context: "ecdh-sha2-nistp521": KexNistp521,
+    Threat: Key exchange broken by Shor's algorithm
+    Migrate to: ML-KEM (Kyber) for key exchange
+
+[*] paramiko\tests\agent.py
+
+    [!] CRITICAL | Line 103
+    Algorithm: RSA
+    Context: (dict(algorithm="rsa-sha2-256"), SSH_AGENT_RSA_SHA2_256),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 104
+    Algorithm: RSA
+    Context: (dict(algorithm="rsa-sha2-512"), SSH_AGENT_RSA_SHA2_512),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 109
+    Algorithm: RSA
+    Context: dict(algorithm="rsa-sha2-256-cert-v01@openssh.com"),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 113
+    Algorithm: RSA
+    Context: dict(algorithm="rsa-sha2-512-cert-v01@openssh.com"),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 143
+    Algorithm: RSA
+    Context: inner_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 149
+    Algorithm: RSA
+    Context: inner_key.load_certificate(_support("rsa.key-cert.pub"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\tests\auth.py
+
+    [!] CRITICAL | Line 154
+    Algorithm: RSA
+    Context: privkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 160
+    Algorithm: RSA
+    Context: pubkeys=["rsa-sha2-256", "rsa-sha2-512"]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 160
+    Algorithm: RSA
+    Context: pubkeys=["rsa-sha2-256", "rsa-sha2-512"]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 166
+    Algorithm: RSA
+    Context: assert "no RSA pubkey algorithms" in str(err)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 169
+    Algorithm: RSA
+    Context: privkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 178
+    Algorithm: RSA
+    Context: pubkeys=["rsa-sha2-256", "rsa-sha2-512"]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 178
+    Algorithm: RSA
+    Context: pubkeys=["rsa-sha2-256", "rsa-sha2-512"]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 187
+    Algorithm: RSA
+    Context: disabled_algorithms=dict(pubkeys=["rsa-sha2-512"])
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 196
+    Algorithm: RSA
+    Context: assert tc._agreed_pubkey_algorithm == "rsa-sha2-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 199
+    Algorithm: RSA
+    Context: privkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 203
+    Algorithm: RSA
+    Context: init=dict(disabled_algorithms=dict(pubkeys=["rsa-sha2-256"])),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 206
+    Algorithm: RSA
+    Context: assert tc._agreed_pubkey_algorithm == "rsa-sha2-512"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 209
+    Algorithm: RSA
+    Context: privkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 213
+    Algorithm: RSA
+    Context: init=dict(disabled_algorithms=dict(pubkeys=["rsa-sha2-512"])),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 216
+    Algorithm: RSA
+    Context: assert tc._agreed_pubkey_algorithm == "rsa-sha2-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 83
+    Algorithm: Ed25519
+    Context: key = Ed25519Key.from_private_key_file(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 293
+    Algorithm: Ed25519
+    Context: pkey = PKey.from_path(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 297
+    Algorithm: Ed25519
+    Context: == "InMemoryPrivateKey(pkey=PKey(alg=ED25519, bits=256, fp=SHA256:J6VESFdD3xSChn8y9PzWzeF+1tl892mOy2
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 301
+    Algorithm: Ed25519
+    Context: real_key = PKey.from_path(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 306
+    Algorithm: Ed25519
+    Context: == "InMemoryPrivateKey(pkey=PKey(alg=ED25519, bits=256, fp=SHA256:J6VESFdD3xSChn8y9PzWzeF+1tl892mOy2
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\conftest.py
+
+    [!] CRITICAL | Line 86
+    Algorithm: RSA
+    Context: host_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 124
+    Algorithm: RSA
+    Context: "rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 125
+    Algorithm: RSA
+    Context: "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 131
+    Algorithm: RSA
+    Context: "rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 132
+    Algorithm: RSA
+    Context: "rsa-sha2-512",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 161
+    Algorithm: RSA
+    Context: - ``short_type``: short identifier, eg ``rsa`` or ``ecdsa-256``
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 162
+    Algorithm: RSA
+    Context: - ``full_type``: the "message style" key identifier, eg ``ssh-rsa``, or
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 145
+    Algorithm: ECDSA
+    Context: "ecdsa-256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 146
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 161
+    Algorithm: ECDSA
+    Context: - ``short_type``: short identifier, eg ``rsa`` or ``ecdsa-256``
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 163
+    Algorithm: ECDSA
+    Context: ``ecdsa-sha2-nistp256``.
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 138
+    Algorithm: Ed25519
+    Context: "ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 139
+    Algorithm: Ed25519
+    Context: "ssh-ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\pkey.py
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 54
+    Algorithm: RSA
+    Context: key = PKey.from_path(str(_support("rsa.key")))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 60
+    Algorithm: RSA
+    Context: mykey = Path(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 90
+    Algorithm: RSA
+    Context: key = PKey.from_path(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 94
+    Algorithm: RSA
+    Context: key.public_blob.key_type == "ssh-rsa-cert-v01@openssh.com"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 98
+    Algorithm: RSA
+    Context: _support("rsa.key-cert.pub")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 102
+    Algorithm: RSA
+    Context: key = PKey.from_path(_support("rsa.key-cert.pub"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 108
+    Algorithm: RSA
+    Context: key.public_blob.key_type == "ssh-rsa-cert-v01@openssh.com"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 112
+    Algorithm: RSA
+    Context: _support("rsa.key-cert.pub")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 118
+    Algorithm: RSA
+    Context: key = PKey.from_path(_support("rsa-lonely.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 125
+    Algorithm: RSA
+    Context: # no rsa-missing.key to load.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 127
+    Algorithm: RSA
+    Context: PKey.from_path(_support("rsa-missing.key-cert.pub"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 128
+    Algorithm: RSA
+    Context: assert info.value.filename.endswith("rsa-missing.key")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 135
+    Algorithm: RSA
+    Context: key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 138
+    Algorithm: RSA
+    Context: msg = key.sign_ssh_data(data, "rsa-sha2-256")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 140
+    Algorithm: RSA
+    Context: assert "rsa-sha2-256" == msg.get_text()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 144
+    Algorithm: RSA
+    Context: key.load_certificate(_support("rsa.key-cert.pub"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 146
+    Algorithm: RSA
+    Context: assert key.public_blob.key_type == "ssh-rsa-cert-v01@openssh.com"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 150
+    Algorithm: RSA
+    Context: assert msg.get_text() == "ssh-rsa-cert-v01@openssh.com"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 165
+    Algorithm: RSA
+    Context: msg = key.sign_ssh_data(data, "rsa-sha2-256-cert-v01@openssh.com")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 167
+    Algorithm: RSA
+    Context: assert "rsa-sha2-256" == msg.get_text()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 174
+    Algorithm: RSA
+    Context: err = "PublicBlob type ssh-rsa-cert-v01@openssh.com incompatible with key type ssh-ed25519"  # noqa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 176
+    Algorithm: RSA
+    Context: edkey.load_certificate(_support("rsa.key-cert.pub"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 185
+    Algorithm: RSA
+    Context: assert key.algorithm_name == "RSA"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 192
+    Algorithm: RSA
+    Context: # algorithm_name is eg "RSA-CERT" - keys loaded directly from disk will
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 221
+    Algorithm: RSA
+    Context: "rsa-sha2-256",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 222
+    Algorithm: RSA
+    Context: "rsa-sha2-256-cert-v01@openssh.com",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 223
+    Algorithm: RSA
+    Context: "rsa-sha2-512",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 224
+    Algorithm: RSA
+    Context: "rsa-sha2-512-cert-v01@openssh.com",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 227
+    Algorithm: RSA
+    Context: "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 228
+    Algorithm: RSA
+    Context: "ssh-rsa-cert-v01@openssh.com",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 245
+    Algorithm: RSA
+    Context: ("rsa.key", RSAPrivateKey),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 260
+    Algorithm: RSA
+    Context: (RSAKey, dict(bits=4098), "RSA"),
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 187
+    Algorithm: ECDSA
+    Context: assert key.algorithm_name == "ECDSA"
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 236
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 237
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp384",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 238
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp521",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 246
+    Algorithm: ECDSA
+    Context: ("ecdsa-256.key", EllipticCurvePrivateKey),
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 173
+    Algorithm: Ed25519
+    Context: edkey = Ed25519Key.from_private_key_file(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 174
+    Algorithm: Ed25519
+    Context: err = "PublicBlob type ssh-rsa-cert-v01@openssh.com incompatible with key type ssh-ed25519"  # noqa
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 189
+    Algorithm: Ed25519
+    Context: assert key.algorithm_name == "ED25519"
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 232
+    Algorithm: Ed25519
+    Context: assert Ed25519Key.identifiers() == ["ssh-ed25519"]
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 247
+    Algorithm: Ed25519
+    Context: # TODO: Ed25519 after we sort it out
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 256
+    Algorithm: Ed25519
+    Context: # TODO: Ed25519 after we sort its writing out
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 310
+    Algorithm: Ed25519
+    Context: == "PKey(alg=ED25519, bits=256, fp=SHA256:UsIasxMWEd9VFEwjARWWtGJ08DgHp1eib3gSBLed54U)"
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\test_client.py
+
+    [!] CRITICAL | Line 48
+    Algorithm: RSA
+    Context: "ssh-rsa": b"\x60\x73\x38\x44\xcb\x51\x86\x65\x7f\xde\xda\xa2\x2b\x5a\x57\xd5",  # noqa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 126
+    Algorithm: RSA
+    Context: host_key = paramiko.RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 171
+    Algorithm: RSA
+    Context: keypath = _support("rsa.key")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 201
+    Algorithm: RSA
+    Context: # ssh-rsa, as it "comes from the key itself" per `man sshd`.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 204
+    Algorithm: RSA
+    Context: "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 254
+    Algorithm: RSA
+    Context: verify that SSHClient works with an RSA key.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 256
+    Algorithm: RSA
+    Context: self._test_connection(key_filename=_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 274
+    Algorithm: RSA
+    Context: "rsa": "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 274
+    Algorithm: RSA
+    Context: "rsa": "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 283
+    Algorithm: RSA
+    Context: ["rsa", "ed25519"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 287
+    Algorithm: RSA
+    Context: ["ed25519", "rsa"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 291
+    Algorithm: RSA
+    Context: ["ed25519", "rsa", "ecdsa-256"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 294
+    Algorithm: RSA
+    Context: (["rsa", "ecdsa-256"], ["ecdsa"]),  # ECDSA success
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 318
+    Algorithm: RSA
+    Context: key_filename=[_support("rsa.key")],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 327
+    Algorithm: RSA
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 335
+    Algorithm: RSA
+    Context: # NOTE: a regular test_connection() w/ rsa.key would incidentally
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 341
+    Algorithm: RSA
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 383
+    Algorithm: RSA
+    Context: host_key = paramiko.RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 395
+    Algorithm: RSA
+    Context: client.get_host_keys().add(host_id, "ssh-rsa", public_host_key)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 397
+    Algorithm: RSA
+    Context: assert public_host_key == client.get_host_keys()[host_id]["ssh-rsa"]
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 486
+    Algorithm: RSA
+    Context: host_key = paramiko.RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 493
+    Algorithm: RSA
+    Context: "ssh-rsa",
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 618
+    Algorithm: RSA
+    Context: self._client_host_key_good(paramiko.RSAKey, "rsa.key")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 49
+    Algorithm: ECDSA
+    Context: "ecdsa-sha2-nistp256": b"\x25\x19\xeb\x55\xe6\xa1\x47\xff\x4f\x38\xd2\x75\x6f\xa5\xd5\x60",  # noqa
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 174
+    Algorithm: ECDSA
+    Context: keypath = _support("ecdsa-256.key")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 260
+    Algorithm: ECDSA
+    Context: verify that SSHClient works with an ECDSA key.
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 262
+    Algorithm: ECDSA
+    Context: self._test_connection(key_filename=_support("ecdsa-256.key"))
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 276
+    Algorithm: ECDSA
+    Context: "ecdsa": "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 276
+    Algorithm: ECDSA
+    Context: "ecdsa": "ecdsa-sha2-nistp256",
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 291
+    Algorithm: ECDSA
+    Context: ["ed25519", "rsa", "ecdsa-256"],
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 293
+    Algorithm: ECDSA
+    Context: ),  # Try ECDSA but fail
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 294
+    Algorithm: ECDSA
+    Context: (["rsa", "ecdsa-256"], ["ecdsa"]),  # ECDSA success
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 294
+    Algorithm: ECDSA
+    Context: (["rsa", "ecdsa-256"], ["ecdsa"]),  # ECDSA success
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 294
+    Algorithm: ECDSA
+    Context: (["rsa", "ecdsa-256"], ["ecdsa"]),  # ECDSA success
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 319
+    Algorithm: ECDSA
+    Context: allowed_keys=["ecdsa-sha2-nistp256"],
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 327
+    Algorithm: ECDSA
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 341
+    Algorithm: ECDSA
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 360
+    Algorithm: ECDSA
+    Context: key_file = _support("ecdsa-256.key")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 615
+    Algorithm: ECDSA
+    Context: self._client_host_key_good(paramiko.ECDSAKey, "ecdsa-256.key")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 50
+    Algorithm: Ed25519
+    Context: "ssh-ed25519": b'\xb3\xd5"\xaa\xf9u^\xe8\xcd\x0e\xea\x02\xb9)\xa2\x80',
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 265
+    Algorithm: Ed25519
+    Context: self._test_connection(key_filename=_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 275
+    Algorithm: Ed25519
+    Context: "ed25519": "ssh-ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 275
+    Algorithm: Ed25519
+    Context: "ed25519": "ssh-ed25519",
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 283
+    Algorithm: Ed25519
+    Context: ["rsa", "ed25519"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 284
+    Algorithm: Ed25519
+    Context: ["ed25519"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 285
+    Algorithm: Ed25519
+    Context: ),  # Original test #3 (but s/DSA/Ed25519/)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 287
+    Algorithm: Ed25519
+    Context: ["ed25519", "rsa"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 288
+    Algorithm: Ed25519
+    Context: ["ed25519"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 291
+    Algorithm: Ed25519
+    Context: ["ed25519", "rsa", "ecdsa-256"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 292
+    Algorithm: Ed25519
+    Context: ["ed25519"],
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 327
+    Algorithm: Ed25519
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 341
+    Algorithm: Ed25519
+    Context: for type_ in ("rsa", "ecdsa-256", "ed25519"):
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 683
+    Algorithm: Ed25519
+    Context: password="pygmalion", disabled_algorithms={"keys": ["ed25519"]}
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 685
+    Algorithm: Ed25519
+    Context: assert self.tc._transport.disabled_algorithms == {"keys": ["ed25519"]}
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\test_config.py
+
+    [!] CRITICAL | Line 413
+    Algorithm: RSA
+    Context: IdentityFile "test rsa key"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 417
+    Algorithm: RSA
+    Context: IdentityFile "test rsa key"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 424
+    Algorithm: RSA
+    Context: "param2": {"hostname": "param2", "identityfile": ["test rsa key"]},
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 427
+    Algorithm: RSA
+    Context: "identityfile": ["id_rsa", "test rsa key"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 431
+    Algorithm: RSA
+    Context: "identityfile": ["id_rsa", "test rsa key"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\tests\test_hostkeys.py
+
+    [!] CRITICAL | Line 34
+    Algorithm: RSA
+    Context: secure.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA1PD6U2/TVxET6lkpKhOk5r\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 37
+    Algorithm: RSA
+    Context: broken.example.com ssh-rsa AAAA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 38
+    Algorithm: RSA
+    Context: happy.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA8bP1ZA7DCZDB9J0s50l31M\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 49
+    Algorithm: RSA
+    Context: secure.example.com\tssh-rsa\tAAAAB3NzaC1yc2EAAAABIwAAAIEA1PD6U2/TVxET6lkpKhOk5r\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 52
+    Algorithm: RSA
+    Context: happy.example.com\tssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA8bP1ZA7DCZDB9J0s50l31M\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 82
+    Algorithm: RSA
+    Context: hostdict["secure.example.com"]["ssh-rsa"].get_fingerprint()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 90
+    Algorithm: RSA
+    Context: hostdict.add(hh, "ssh-rsa", key)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 93
+    Algorithm: RSA
+    Context: fp = hexlify(x["ssh-rsa"].get_fingerprint()).upper()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 105
+    Algorithm: RSA
+    Context: fp = hexlify(x["ssh-rsa"].get_fingerprint()).upper()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 117
+    Algorithm: RSA
+    Context: "ssh-rsa": key,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 121
+    Algorithm: RSA
+    Context: hostdict["fake.example.com"]["ssh-rsa"] = key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 128
+    Algorithm: RSA
+    Context: hostdict["secure.example.com"]["ssh-rsa"].get_fingerprint()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 43
+    Algorithm: ECDSA
+    Context: curvy.example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlz\
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 41
+    Algorithm: Ed25519
+    Context: modern.example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHEChAIxsh2hr8Q\
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 55
+    Algorithm: Ed25519
+    Context: modern.example.com\tssh-ed25519\tAAAAC3NzaC1lZDI1NTE5AAAAIKHEChAIxsh2hr8Q\
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 114
+    Algorithm: Ed25519
+    Context: _support("ed25519.key")
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 118
+    Algorithm: Ed25519
+    Context: "ssh-ed25519": key_ed25519,
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 132
+    Algorithm: Ed25519
+    Context: hostdict["secure.example.com"]["ssh-ed25519"].get_fingerprint()
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\test_pkey.py
+
+    [!] CRITICAL | Line 34
+    Algorithm: RSA
+    Context: from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateNumbers
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 50
+    Algorithm: RSA
+    Context: PUB_RSA = "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA049W6geFpmsljTwfvI1UmKWWJPNFI74+vNKTk4dmzkQY2yAMs6Fhl
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 54
+    Algorithm: RSA
+    Context: PUB_RSA_2K_OPENSSH = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF+Dpr54DX0WdeTDpNAMdkCWEkl3OXtNgf58qlN1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 70
+    Algorithm: RSA
+    Context: -----BEGIN RSA PRIVATE KEY-----
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 84
+    Algorithm: RSA
+    Context: -----END RSA PRIVATE KEY-----
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 116
+    Algorithm: RSA
+    Context: TEST_KEY_BYTESTR = "\x00\x00\x00\x07ssh-rsa\x00\x00\x00\x01#\x00\x00\x00\x00ӏV\x07k%<\x1fT$E#>ғfD\x1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 126
+    Algorithm: RSA
+    Context: fh.readline()[:-1], "-----BEGIN RSA PRIVATE KEY-----"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 137
+    Algorithm: RSA
+    Context: key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 138
+    Algorithm: RSA
+    Context: self.assertEqual("ssh-rsa", key.get_name())
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 160
+    Algorithm: RSA
+    Context: RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 171
+    Algorithm: RSA
+    Context: self.assertEqual("ssh-rsa", key.get_name())
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 180
+    Algorithm: RSA
+    Context: key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 188
+    Algorithm: RSA
+    Context: key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 202
+    Algorithm: RSA
+    Context: self._sign_and_verify_rsa("rsa-sha2-512", SIGNED_RSA_512)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 205
+    Algorithm: RSA
+    Context: self._sign_and_verify_rsa("rsa-sha2-256", SIGNED_RSA_256)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 210
+    Algorithm: RSA
+    Context: msg = key.sign_ssh_data(b"jerri blank", algorithm="rsa-sha2-256")
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 280
+    Algorithm: RSA
+    Context: # verify that the rsa private key can sign and verify
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 342
+    Algorithm: RSA
+    Context: # verify that the rsa private key can sign and verify
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 396
+    Algorithm: RSA
+    Context: # verify that the rsa private key can sign and verify
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 414
+    Algorithm: RSA
+    Context: self.assertEqual("ssh-rsa", key.get_name())
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 424
+    Algorithm: RSA
+    Context: "paramiko.rsakey.rsa.RSAPrivateNumbers", wraps=RSAPrivateNumbers
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 470
+    Algorithm: RSA
+    Context: key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 51
+    Algorithm: ECDSA
+    Context: PUB_ECDSA_256 = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJSPZm3ZWkv
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 52
+    Algorithm: ECDSA
+    Context: PUB_ECDSA_384 = "ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzODQAAABhBBbGibQLW9A
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 53
+    Algorithm: ECDSA
+    Context: PUB_ECDSA_521 = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBACaOaFLZGu
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 57
+    Algorithm: ECDSA
+    Context: PUB_EC_384_OPENSSH = "ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzODQAAABhBIch5L
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 220
+    Algorithm: ECDSA
+    Context: self.assertEqual(key.get_name(), "ecdsa-sha2-nistp256")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 227
+    Algorithm: ECDSA
+    Context: self.assertEqual(key.get_name(), "ecdsa-sha2-nistp256")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 234
+    Algorithm: ECDSA
+    Context: self.assertEqual(key.get_name(), "ecdsa-sha2-nistp384")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 241
+    Algorithm: ECDSA
+    Context: self.assertEqual(key.get_name(), "ecdsa-sha2-nistp521")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 244
+    Algorithm: ECDSA
+    Context: key = ECDSAKey.from_private_key_file(_support("ecdsa-256.key"))
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 245
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp256", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 263
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp256", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 272
+    Algorithm: ECDSA
+    Context: key = ECDSAKey.from_private_key_file(_support("ecdsa-256.key"))
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 281
+    Algorithm: ECDSA
+    Context: key = ECDSAKey.from_private_key_file(_support("ecdsa-256.key"))
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 285
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp256", msg.get_text())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 286
+    Algorithm: ECDSA
+    Context: # ECDSA signatures tend to be different each time, so we can't compare
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 296
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp384", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 314
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp384", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 322
+    Algorithm: ECDSA
+    Context: path = _support("ecdsa-256.key")
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 347
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp384", msg.get_text())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 348
+    Algorithm: ECDSA
+    Context: # ECDSA signatures tend to be different each time, so we can't compare
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 358
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp521", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 379
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp521", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 401
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp521", msg.get_text())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 402
+    Algorithm: ECDSA
+    Context: # ECDSA signatures tend to be different each time, so we can't compare
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 440
+    Algorithm: ECDSA
+    Context: self.assertEqual("ecdsa-sha2-nistp384", key.get_name())
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 475
+    Algorithm: Ed25519
+    Context: key1 = Ed25519Key.from_private_key_file(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 495
+    Algorithm: Ed25519
+    Context: key = Ed25519Key.from_private_key_file(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 510
+    Algorithm: Ed25519
+    Context: _support("badhash_key1.ed25519.key")
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 513
+    Algorithm: Ed25519
+    Context: _support("badhash_key2.ed25519.key")
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 528
+    Algorithm: Ed25519
+    Context: with open(_support("ed25519.key")) as pkey_fileobj:
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\test_transport.py
+
+    [!] CRITICAL | Line 117
+    Algorithm: RSA
+    Context: host_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 183
+    Algorithm: RSA
+    Context: host_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 209
+    Algorithm: RSA
+    Context: host_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 860
+    Algorithm: RSA
+    Context: host_key = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1110
+    Algorithm: RSA
+    Context: "keys": ["rsa-sha2-512"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1118
+    Algorithm: RSA
+    Context: assert "rsa-sha2-512" in t._preferred_keys
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1119
+    Algorithm: RSA
+    Context: assert "rsa-sha2-512" not in t.preferred_keys
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1121
+    Algorithm: RSA
+    Context: assert "rsa-sha2-512-cert-v01@openssh.com" not in t.preferred_keys
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1131
+    Algorithm: RSA
+    Context: "keys": ["rsa-sha2-256"],
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1160
+    Algorithm: RSA
+    Context: assert "rsa-sha2-256" not in server_keys
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1166
+    Algorithm: RSA
+    Context: # NOTE: these all rely on the default server() hostkey being RSA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1176
+    Algorithm: RSA
+    Context: assert tc.host_key_type == "rsa-sha2-512"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1181
+    Algorithm: RSA
+    Context: init=dict(disabled_algorithms=dict(keys=["rsa-sha2-512"]))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1183
+    Algorithm: RSA
+    Context: assert tc.host_key_type == "rsa-sha2-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1210
+    Algorithm: RSA
+    Context: hostkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1215
+    Algorithm: RSA
+    Context: assert tc.host_key_type == "rsa-sha2-512"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1228
+    Algorithm: RSA
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1228
+    Algorithm: RSA
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1232
+    Algorithm: RSA
+    Context: privkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1237
+    Algorithm: RSA
+    Context: disabled_algorithms=dict(pubkeys=["rsa-sha2-512"])
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1243
+    Algorithm: RSA
+    Context: assert tc._agreed_pubkey_algorithm == "rsa-sha2-256"
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1228
+    Algorithm: ECDSA
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 1228
+    Algorithm: ECDSA
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [!] CRITICAL | Line 1228
+    Algorithm: ECDSA
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+    [W] HIGH | Line 1228
+    Algorithm: Ed25519
+    Context: "server-sig-algs": b"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] paramiko\tests\test_util.py
+
+    [!] CRITICAL | Line 35
+    Algorithm: RSA
+    Context: secure.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA1PD6U2/TVxET6lkpKhOk5r\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 38
+    Algorithm: RSA
+    Context: happy.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA8bP1ZA7DCZDB9J0s50l31M\
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 120
+    Algorithm: RSA
+    Context: hostdict["secure.example.com"]["ssh-rsa"].get_fingerprint()
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] paramiko\tests\_util.py
+
+    [!] CRITICAL | Line 237
+    Algorithm: RSA
+    Context: ``rsa.key``.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 287
+    Algorithm: RSA
+    Context: hostkey = RSAKey.from_private_key_file(_support("rsa.key"))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 91
+    Algorithm: Ed25519
+    Context: paranoid_key = Ed25519Key.from_private_key_file(_support("ed25519.key"))
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+============================================================
+SUMMARY: 20 files affected | 384 total risks
+
+[!!!] CRITICAL: 326 quantum-vulnerable findings!
+    Immediate migration to NIST PQC standards required.
+============================================================

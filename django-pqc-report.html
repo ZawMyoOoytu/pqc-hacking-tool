@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Vulnerability Assessment Report</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #eaeaea;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid #2a2a4a;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e94560, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        .meta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .summary-card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #2a2a4a;
+        }
+
+        .summary-card.critical {
+            border-left: 4px solid #e94560;
+        }
+
+        .summary-card.high {
+            border-left: 4px solid #ff6b35;
+        }
+
+        .summary-card.medium {
+            border-left: 4px solid #ffc107;
+        }
+
+        .summary-card.low {
+            border-left: 4px solid #4caf50;
+        }
+
+        .summary-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .summary-label {
+            color: #a0a0a0;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .critical .summary-value { color: #e94560; }
+        .high .summary-value { color: #ff6b35; }
+        .medium .summary-value { color: #ffc107; }
+        .low .summary-value { color: #4caf50; }
+
+        .risk-chart {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #2a2a4a;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .chart-label {
+            width: 100px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .chart-bar-container {
+            flex: 1;
+            height: 24px;
+            background: #0f3460;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .chart-bar-fill.critical { background: #e94560; }
+        .chart-bar-fill.high { background: #ff6b35; }
+        .chart-bar-fill.medium { background: #ffc107; }
+        .chart-bar-fill.low { background: #4caf50; }
+
+        .chart-count {
+            width: 40px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        section {
+            margin: 2rem 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2a2a4a;
+        }
+
+        .findings-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #16213e;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .findings-table th,
+        .findings-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .findings-table th {
+            background: #0f3460;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .findings-table tr:hover {
+            background: #0f3460;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .risk-badge.critical {
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+        }
+
+        .risk-badge.high {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+
+        .risk-badge.medium {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .risk-badge.low {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .file-path {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            word-break: break-all;
+        }
+
+        .context {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            background: #0f3460;
+            padding: 0.5rem;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recommendation {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 2px solid #2a2a4a;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .no-findings {
+            text-align: center;
+            padding: 3rem;
+            color: #a0a0a0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .findings-table {
+                font-size: 0.85rem;
+            }
+
+            .findings-table th,
+            .findings-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <div class="logo">Quantum Shield Labs</div>
+            <div class="subtitle">Cryptographic Vulnerability Assessment Report</div>
+            <div class="meta">
+                <div>Scanned: <strong>C:\Users\heart\composer\pqc-scanner\django</strong></div>
+                <div>Generated: 2026-06-07 10:17:14 | Scanner v0.1.0</div>
+            </div>
+        </header>
+        
+        
+        <section>
+            <h2>Executive Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-value">3045</div>
+                    <div class="summary-label">Files Scanned</div>
+                </div>
+                <div class="summary-card critical">
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Critical (Quantum-Vulnerable)</div>
+                </div>
+                <div class="summary-card high">
+                    <div class="summary-value">50</div>
+                    <div class="summary-label">High (Deprecated)</div>
+                </div>
+                <div class="summary-card medium">
+                    <div class="summary-value">136</div>
+                    <div class="summary-label">Medium (Monitor)</div>
+                </div>
+                <div class="summary-card low">
+                    <div class="summary-value">16</div>
+                    <div class="summary-label">Low (Adequate)</div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <section>
+            <h2>Risk Distribution</h2>
+            <div class="risk-chart">
+                <div class="chart-bar">
+                    <span class="chart-label">Critical</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill critical" style="width: 0.0%"></div>
+                    </div>
+                    <span class="chart-count">0</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">High</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill high" style="width: 24.8%"></div>
+                    </div>
+                    <span class="chart-count">50</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Medium</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill medium" style="width: 67.3%"></div>
+                    </div>
+                    <span class="chart-count">136</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Low</span>
+                    <div class="chart-bar-container">
+                        <div class="chart-bar-fill low" style="width: 7.9%"></div>
+                    </div>
+                    <span class="chart-count">16</span>
+                </div>
+            </div>
+        </section>
+        
+        
+        <section>
+            <h2>Detailed Findings (202 total)</h2>
+            <table class="findings-table">
+                <thead>
+                    <tr>
+                        <th>Risk</th>
+                        <th>Algorithm</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:384</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:663</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:669</td>
+                    <td>MD5 hash function detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3. MD5 is cryptographically broken.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\gis\gdal\prototypes\ds.py:40</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\gis\gdal\prototypes\ds.py:48</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\gis\gdal\prototypes\raster.py:41</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\gis\gdal\prototypes\raster.py:97</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\gis\gdal\prototypes\srs.py:106</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:72</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\base.py:35</td>
+                    <td>DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. DES has inadequate key length (56 bits).</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:217</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:218</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:157</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\query.py:30</td>
+                    <td>DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. DES has inadequate key length (56 bits).</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\__init__.py:43</td>
+                    <td>DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. DES has inadequate key length (56 bits).</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\template\loaders\cached.py:96</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\test\runner.py:116</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\test\runner.py:650</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:131</td>
+                    <td>MD5 hash function detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3. MD5 is cryptographically broken.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:132</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\tests.py:94</td>
+                    <td>MD5 hash function detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3. MD5 is cryptographically broken.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\tests.py:94</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:112</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:117</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:119</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:125</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:126</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:127</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:316</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>MD5</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:346</td>
+                    <td>MD5 algorithm reference detected</td>
+                    <td class="recommendation">Replace with SHA-256 or SHA-3.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\backends\base\test_creation.py:211</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\file_uploads\tests.py:116</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\file_uploads\tests.py:121</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\file_uploads\views.py:50</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\file_uploads\views.py:52</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\generic_relations\tests.py:5</td>
+                    <td>DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. DES has inadequate key length (56 bits).</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_inheritance\test_abstract_inheritance.py:19</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_inheritance\test_abstract_inheritance.py:28</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_inheritance\test_abstract_inheritance.py:31</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_inheritance\test_abstract_inheritance.py:367</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_inheritance\test_abstract_inheritance.py:371</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\prefetch_related\tests.py:13</td>
+                    <td>DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. DES has inadequate key length (56 bits).</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>3DES</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\serializers\test_deserialization.py:23</td>
+                    <td>Triple DES encryption detected</td>
+                    <td class="recommendation">Migrate to AES-256. 3DES is deprecated and slow.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:45</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:94</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:104</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:114</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:135</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:145</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge high">high</span></td>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:194</td>
+                    <td>SHA-1 hash function detected</td>
+                    <td class="recommendation">Migrate to SHA-256 or SHA-3. SHA-1 is deprecated due to collision attacks.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Configuration</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\biome.json</td>
+                    <td>Cryptographic configuration at linter.rules.complexity.noUselessLoneBlockStatements</td>
+                    <td class="recommendation">Document this configuration for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\conf\global_settings.py:554</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:240</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:405</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:406</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:408</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:409</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:418</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:423</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\admin\DateTimeShortcuts.js:551</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\admin\static\admin\js\nav_sidebar.js:46</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\base_user.py:148</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:321</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:323</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:326</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:328</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:489</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:499</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:500</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:562</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\hashers.py:573</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\contrib\auth\tokens.py:20</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\core\signing.py:11</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\core\signing.py:106</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\core\signing.py:221</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\core\signing.py:232</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:11</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:11</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:11</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:78</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:79</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:80</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:469</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:472</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:475</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:478</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:481</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:484</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\migrations\graph.py:17</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\migrations\graph.py:22</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:315</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:316</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:317</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:320</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:321</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:322</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:325</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:326</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:327</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:58</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:59</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:60</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:160</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:161</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:162</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\utils\crypto.py:28</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\utils\crypto.py:36</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\utils\crypto.py:88</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:16</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:39</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:61</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:64</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:65</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:133</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\do_django_release.py:227</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\scripts\tests.py:94</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_forms.py:1442</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_forms.py:1449</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:11</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:53</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:59</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:75</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:85</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:88</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:94</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:96</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:97</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:102</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:103</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:104</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:132</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:133</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:135</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:138</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:145</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:149</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:150</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:282</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:302</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:303</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:315</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:345</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:359</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:391</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:412</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_hashers.py:558</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_models.py:319</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_models.py:340</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_templatetags.py:12</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\auth_tests\test_templatetags.py:16</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\custom_lookups\tests.py:164</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>Private Key</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\custom_lookups\tests.py:168</td>
+                    <td>Private key reference in configuration</td>
+                    <td class="recommendation">Ensure private keys are stored securely. Document key locations for quantum migration planning.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:3</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:10</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:26</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:28</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:47</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha256.py:49</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:3</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:10</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:26</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:28</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:52</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-384</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:54</td>
+                    <td>SHA-384 hash function detected</td>
+                    <td class="recommendation">SHA-384 is secure. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:3</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:10</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:26</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:28</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:52</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha512.py:54</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:80</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:83</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:104</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:107</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:863</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\forms_tests\tests\test_media.py:866</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\signing\tests.py:50</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\signing\tests.py:57</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\template_tests\syntax_tests\test_csp_nonce_attr.py:68</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\template_tests\syntax_tests\test_csp_nonce_attr.py:73</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:52</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:73</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:158</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:168</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-512</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:178</td>
+                    <td>SHA-512 hash function detected</td>
+                    <td class="recommendation">SHA-512 is secure with good quantum resistance. No immediate action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge medium">medium</span></td>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\utils_tests\test_crypto.py:219</td>
+                    <td>SHA-256 hash function detected</td>
+                    <td class="recommendation">SHA-256 is currently secure. Consider SHA-3 for new implementations as a hedge against future cryptanalysis.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:11</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:79</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:475</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\backends\sqlite3\_functions.py:478</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:320</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:321</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\text.py:322</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:59</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\django\db\models\functions\__init__.py:161</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:3</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:10</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:26</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:28</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:52</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>SHA-3</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\db_functions\text\test_sha384.py:54</td>
+                    <td>SHA-3 hash function detected</td>
+                    <td class="recommendation">SHA-3 is the latest standard with excellent security properties. No action required.</td>
+                </tr>
+            
+                <tr>
+                    <td><span class="risk-badge low">low</span></td>
+                    <td><strong>Post-Quantum</strong></td>
+                    <td class="file-path">C:\Users\heart\composer\pqc-scanner\django\tests\model_enums\tests.py:229</td>
+                    <td>Post-quantum cryptographic algorithm detected</td>
+                    <td class="recommendation">Excellent! Post-quantum algorithms are the recommended path forward.</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </section>
+        
+        
+        <footer>
+            <p>Generated by <strong>Crypto Scanner</strong> |
+               <a href="https://quantumshieldlabs.dev">Quantum Shield Labs</a></p>
+            <p>&copy; 2026 Quantum Shield Labs. All rights reserved.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                This report identifies cryptographic algorithms that may be vulnerable to quantum computing attacks.
+                Plan your migration to post-quantum cryptography today.
+            </p>
+        </footer>
+        
+    </div>
+</body>
+</html>

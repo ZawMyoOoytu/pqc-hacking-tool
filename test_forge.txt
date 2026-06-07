@@ -1,0 +1,3528 @@
+[*] Scanning: node-forge
+============================================================
+PQC HACKING TOOL - SECURITY ASSESSMENT REPORT
+Scan Date: 2026-06-07 10:13:33
+============================================================
+
+[*] node-forge\karma.conf.js
+
+    [!] CRITICAL | Line 28
+    Algorithm: RSA
+    Context: files.push('tests/karma/web-worker-rsa.js');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\examples\create-cert.js
+
+    [!] CRITICAL | Line 4
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\examples\create-csr.js
+
+    [!] CRITICAL | Line 4
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\examples\create-pkcs12.js
+
+    [!] CRITICAL | Line 6
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\examples\sign-p7.js
+
+    [!] CRITICAL | Line 46
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\examples\tls.js
+
+    [!] CRITICAL | Line 7
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\aes.js
+
+    [W] HIGH | Line 654
+    Algorithm: AES-128
+    Context: * AES-128 (Nb=4, Nk=4, Nr=10)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\lib\asn1.js
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: * The RSA algorithm creates public and private keys that are often stored in
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\ed25519.js
+
+    [W] HIGH | Line 2
+    Algorithm: Ed25519
+    Context: * JavaScript implementation of Ed25519.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 28
+    Algorithm: Ed25519
+    Context: * Ed25519 algorithms, see RFC 8032:
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 32
+    Algorithm: Ed25519
+    Context: module.exports = forge.pki.ed25519 = forge.ed25519 = forge.ed25519 || {};
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 32
+    Algorithm: Ed25519
+    Context: module.exports = forge.pki.ed25519 = forge.ed25519 = forge.ed25519 || {};
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 32
+    Algorithm: Ed25519
+    Context: module.exports = forge.pki.ed25519 = forge.ed25519 = forge.ed25519 || {};
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 33
+    Algorithm: Ed25519
+    Context: var ed25519 = forge.ed25519;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 33
+    Algorithm: Ed25519
+    Context: var ed25519 = forge.ed25519;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 35
+    Algorithm: Ed25519
+    Context: ed25519.constants = {};
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 36
+    Algorithm: Ed25519
+    Context: ed25519.constants.PUBLIC_KEY_BYTE_LENGTH = 32;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 37
+    Algorithm: Ed25519
+    Context: ed25519.constants.PRIVATE_KEY_BYTE_LENGTH = 64;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 38
+    Algorithm: Ed25519
+    Context: ed25519.constants.SEED_BYTE_LENGTH = 32;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 39
+    Algorithm: Ed25519
+    Context: ed25519.constants.SIGN_BYTE_LENGTH = 64;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 40
+    Algorithm: Ed25519
+    Context: ed25519.constants.HASH_BYTE_LENGTH = 64;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 42
+    Algorithm: Ed25519
+    Context: ed25519.generateKeyPair = function(options) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 47
+    Algorithm: Ed25519
+    Context: seed = forge.random.getBytesSync(ed25519.constants.SEED_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 49
+    Algorithm: Ed25519
+    Context: if(seed.length !== ed25519.constants.SEED_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 51
+    Algorithm: Ed25519
+    Context: '"seed" must be ' + ed25519.constants.SEED_BYTE_LENGTH +
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 61
+    Algorithm: Ed25519
+    Context: var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 62
+    Algorithm: Ed25519
+    Context: var sk = new NativeBuffer(ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 78
+    Algorithm: Ed25519
+    Context: ed25519.privateKeyFromAsn1 = function(obj) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 113
+    Algorithm: Ed25519
+    Context: ed25519.publicKeyFromAsn1 = function(obj) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 130
+    Algorithm: Ed25519
+    Context: if(publicKeyBytes.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 139
+    Algorithm: Ed25519
+    Context: ed25519.publicKeyFromPrivateKey = function(options) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 144
+    Algorithm: Ed25519
+    Context: if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 147
+    Algorithm: Ed25519
+    Context: ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 150
+    Algorithm: Ed25519
+    Context: var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 157
+    Algorithm: Ed25519
+    Context: ed25519.sign = function(options) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 164
+    Algorithm: Ed25519
+    Context: if(privateKey.length === ed25519.constants.SEED_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 165
+    Algorithm: Ed25519
+    Context: var keyPair = ed25519.generateKeyPair({seed: privateKey});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 167
+    Algorithm: Ed25519
+    Context: } else if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 170
+    Algorithm: Ed25519
+    Context: ed25519.constants.SEED_BYTE_LENGTH + ' or ' +
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 171
+    Algorithm: Ed25519
+    Context: ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 175
+    Algorithm: Ed25519
+    Context: ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 178
+    Algorithm: Ed25519
+    Context: var sig = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 185
+    Algorithm: Ed25519
+    Context: ed25519.verify = function(options) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 197
+    Algorithm: Ed25519
+    Context: if(sig.length !== ed25519.constants.SIGN_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 200
+    Algorithm: Ed25519
+    Context: ed25519.constants.SIGN_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 206
+    Algorithm: Ed25519
+    Context: if(publicKey.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 209
+    Algorithm: Ed25519
+    Context: ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 212
+    Algorithm: Ed25519
+    Context: var sm = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 213
+    Algorithm: Ed25519
+    Context: var m = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 215
+    Algorithm: Ed25519
+    Context: for(i = 0; i < ed25519.constants.SIGN_BYTE_LENGTH; ++i) {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 219
+    Algorithm: Ed25519
+    Context: sm[i + ed25519.constants.SIGN_BYTE_LENGTH] = msg[i];
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 298
+    Algorithm: Ed25519
+    Context: var out = new NativeBuffer(ed25519.constants.HASH_BYTE_LENGTH);
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\lib\index.js
+
+    [W] HIGH | Line 14
+    Algorithm: Ed25519
+    Context: require('./ed25519');
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\lib\jsbn.js
+
+    [!] CRITICAL | Line 5
+    Algorithm: RSA
+    Context: // Basic JavaScript BN library - subset useful for RSA encryption.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 621
+    Algorithm: RSA
+    Context: // Extended JavaScript BN functions, required for RSA private ops.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\kem.js
+
+    [!] CRITICAL | Line 2
+    Algorithm: RSA
+    Context: * Javascript implementation of RSA-KEM.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: * The API for the RSA Key Encapsulation Mechanism (RSA-KEM) from ISO 18033-2.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: * The API for the RSA Key Encapsulation Mechanism (RSA-KEM) from ISO 18033-2.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 22
+    Algorithm: RSA
+    Context: forge.kem.rsa = {};
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 25
+    Algorithm: RSA
+    Context: * Creates an RSA KEM API object for generating a secret asymmetric key.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 38
+    Algorithm: RSA
+    Context: forge.kem.rsa.create = function(kdf, options) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 47
+    Algorithm: RSA
+    Context: * @param publicKey the RSA public key to encrypt with.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 84
+    Algorithm: RSA
+    Context: * @param privateKey the RSA private key to decrypt with.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\oids.js
+
+    [W] HIGH | Line 37
+    Algorithm: Ed25519
+    Context: // Edwards-curve Digital Signature Algorithm (EdDSA) Ed25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\lib\pbe.js
+
+    [!] CRITICAL | Line 30
+    Algorithm: RSA
+    Context: require('./rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 429
+    Algorithm: RSA
+    Context: * Encrypts an RSA private key. By default, the key will be wrapped in
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 442
+    Algorithm: RSA
+    Context: * @param rsaKey the RSA key to encrypt.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 501
+    Algorithm: RSA
+    Context: var error = new Error('Could not encrypt RSA private key; unsupported ' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 515
+    Algorithm: RSA
+    Context: type: 'RSA PRIVATE KEY',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 530
+    Algorithm: RSA
+    Context: * Decrypts an RSA private key.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 535
+    Algorithm: RSA
+    Context: * @return the RSA key on success, null on failure.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 544
+    Algorithm: RSA
+    Context: msg.type !== 'RSA PRIVATE KEY') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 546
+    Algorithm: RSA
+    Context: 'is not "ENCRYPTED PRIVATE KEY", "PRIVATE KEY", or "RSA PRIVATE KEY".');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 471
+    Algorithm: AES-128
+    Context: algorithm = 'AES-128-CBC';
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 563
+    Algorithm: AES-128
+    Context: case 'AES-128-CBC':
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\lib\pem.js
+
+    [!] CRITICAL | Line 12
+    Algorithm: RSA
+    Context: * type: identifies the type of message (eg: "RSA PRIVATE KEY").
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\pkcs1.js
+
+    [!] CRITICAL | Line 2
+    Algorithm: RSA
+    Context: * Partial implementation of PKCS#1 v2.2: RSA-OEAP
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 6
+    Algorithm: RSA
+    Context: * https://github.com/kjur/jsjws/blob/master/rsa.js:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 34
+    Algorithm: RSA
+    Context: * JavaScript Implementation of PKCS #1 v2.1 RSA CRYPTOGRAPHY STANDARD (RSA Laboratories, June 14, 20
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 34
+    Algorithm: RSA
+    Context: * JavaScript Implementation of PKCS #1 v2.1 RSA CRYPTOGRAPHY STANDARD (RSA Laboratories, June 14, 20
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 39
+    Algorithm: RSA
+    Context: * Official documentation: http://www.rsa.com/rsalabs/node.asp?id=2125
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 58
+    Algorithm: RSA
+    Context: * This method does not perform RSA encryption, it only encodes the message
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 61
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 152
+    Algorithm: RSA
+    Context: * This method does not perform RSA decryption, it only decodes the message
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 155
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\pkcs12.js
+
+    [!] CRITICAL | Line 103
+    Algorithm: RSA
+    Context: require('./rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\pkcs7.js
+
+    [!] CRITICAL | Line 673
+    Algorithm: RSA
+    Context: * @param privKey The (RSA) private key object
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 706
+    Algorithm: RSA
+    Context: // supports RSA so far.  If the PKI module supports other
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 871
+    Algorithm: RSA
+    Context: // Parameter, force NULL, only RSA supported for now.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\pki.js
+
+    [!] CRITICAL | Line 3
+    Algorithm: RSA
+    Context: * support for RSA public and private keys.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 17
+    Algorithm: RSA
+    Context: require('./rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 45
+    Algorithm: RSA
+    Context: * Converts an RSA private key from PEM format.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 54
+    Algorithm: RSA
+    Context: if(msg.type !== 'PRIVATE KEY' && msg.type !== 'RSA PRIVATE KEY') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 56
+    Algorithm: RSA
+    Context: 'header type is not "PRIVATE KEY" or "RSA PRIVATE KEY".');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 71
+    Algorithm: RSA
+    Context: * Converts an RSA private key to PEM format.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 81
+    Algorithm: RSA
+    Context: type: 'RSA PRIVATE KEY',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\prime.worker.js
+
+    [!] CRITICAL | Line 2
+    Algorithm: RSA
+    Context: * RSA Key Generation Worker.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\pss.js
+
+    [!] CRITICAL | Line 77
+    Algorithm: RSA
+    Context: * @param modsBits the length of the RSA modulus in bits.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 155
+    Algorithm: RSA
+    Context: *          (RSA decryption result).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 156
+    Algorithm: RSA
+    Context: * @param modsBits the length of the RSA modulus in bits.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 167
+    Algorithm: RSA
+    Context: *    is the length in bits of the RSA modulus n */
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\random.js
+
+    [W] HIGH | Line 32
+    Algorithm: AES-128
+    Context: // the default prng plugin, uses AES-128
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\lib\rsa.js
+
+    [!] CRITICAL | Line 2
+    Algorithm: RSA
+    Context: * Javascript implementation of basic RSA algorithms.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 8
+    Algorithm: RSA
+    Context: * The only algorithm currently supported for PKI is RSA.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 10
+    Algorithm: RSA
+    Context: * An RSA key is often stored in ASN.1 DER format. The SubjectPublicKeyInfo
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 15
+    Algorithm: RSA
+    Context: * for the algorithm, if any. In the case of RSA, there aren't any.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 27
+    Algorithm: RSA
+    Context: * For an RSA public key, the subjectPublicKey is:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 46
+    Algorithm: RSA
+    Context: * An RSA private key as the following structure:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 62
+    Algorithm: RSA
+    Context: * The OID for the RSA key algorithm is: 1.2.840.113549.1.1.1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 86
+    Algorithm: RSA
+    Context: * RSA encryption and decryption, see RFC 2313.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 89
+    Algorithm: RSA
+    Context: module.exports = forge.pki.rsa = forge.rsa = forge.rsa || {};
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 89
+    Algorithm: RSA
+    Context: module.exports = forge.pki.rsa = forge.rsa = forge.rsa || {};
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 89
+    Algorithm: RSA
+    Context: module.exports = forge.pki.rsa = forge.rsa = forge.rsa || {};
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 132
+    Algorithm: RSA
+    Context: // validator for an RSA private key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 205
+    Algorithm: RSA
+    Context: // validator for an RSA public key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 230
+    Algorithm: RSA
+    Context: // Note: Currently only works with an RSA public key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 231
+    Algorithm: RSA
+    Context: var publicKeyValidator = forge.pki.rsa.publicKeyValidator = {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 319
+    Algorithm: RSA
+    Context: * @return the encoded message (ready for RSA encryption)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 353
+    Algorithm: RSA
+    Context: * Performs x^c mod n (RSA encryption or decryption operation).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 407
+    Algorithm: RSA
+    Context: For RSA we are only concerned with k = 2. The modulus n = pq, where
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 408
+    Algorithm: RSA
+    Context: p and q are coprime. The RSA decryption algorithm is:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 431
+    Algorithm: RSA
+    Context: exponent d mod (p - 1) is stored in the RSA private key (the same
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 497
+    Algorithm: RSA
+    Context: * Performs RSA encryption.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 510
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 517
+    Algorithm: RSA
+    Context: pki.rsa.encrypt = function(m, key, bt) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 537
+    Algorithm: RSA
+    Context: // do RSA encryption
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 558
+    Algorithm: RSA
+    Context: * Performs RSA decryption.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 563
+    Algorithm: RSA
+    Context: * the RSA encryption block.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 566
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 572
+    Algorithm: RSA
+    Context: pki.rsa.decrypt = function(ed, key, pub, ml) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 594
+    Algorithm: RSA
+    Context: // do RSA decryption
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 619
+    Algorithm: RSA
+    Context: * Creates an RSA key-pair generation state object. It is used to allow
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 632
+    Algorithm: RSA
+    Context: pki.rsa.createKeyPairGenerationState = function(bits, e, options) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 691
+    Algorithm: RSA
+    Context: * var state = pki.rsa.createKeyPairGenerationState(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 694
+    Algorithm: RSA
+    Context: *   if(!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 711
+    Algorithm: RSA
+    Context: pki.rsa.stepKeyPairGenerationState = function(state, n) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 720
+    Algorithm: RSA
+    Context: // do key generation (based on Tom Wu's rsa.js, see jsbn.js license)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 834
+    Algorithm: RSA
+    Context: privateKey: pki.rsa.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 838
+    Algorithm: RSA
+    Context: publicKey: pki.rsa.setPublicKey(state.n, state.e)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 852
+    Algorithm: RSA
+    Context: * Generates an RSA public-private key pair in a single call.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 881
+    Algorithm: RSA
+    Context: pki.rsa.generateKeyPair = function(bits, e, options, callback) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 934
+    Algorithm: RSA
+    Context: return _crypto.generateKeyPair('rsa', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1014
+    Algorithm: RSA
+    Context: var keypair = _crypto.generateKeyPairSync('rsa', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1035
+    Algorithm: RSA
+    Context: var state = pki.rsa.createKeyPairGenerationState(bits, e, options);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1037
+    Algorithm: RSA
+    Context: pki.rsa.stepKeyPairGenerationState(state, 0);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1044
+    Algorithm: RSA
+    Context: * Sets an RSA public key from BigIntegers modulus and exponent.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1051
+    Algorithm: RSA
+    Context: pki.setRsaPublicKey = pki.rsa.setPublicKey = function(n, e) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1059
+    Algorithm: RSA
+    Context: * should use the 'RSA-OAEP' decryption scheme, 'RSAES-PKCS1-V1_5' is for
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1065
+    Algorithm: RSA
+    Context: *          'RSA-OAEP',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1066
+    Algorithm: RSA
+    Context: *          'RAW', 'NONE', or null to perform raw RSA encryption,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1087
+    Algorithm: RSA
+    Context: } else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1099
+    Algorithm: RSA
+    Context: // do scheme-based encoding then rsa encryption
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1101
+    Algorithm: RSA
+    Context: return pki.rsa.encrypt(e, key, true);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1111
+    Algorithm: RSA
+    Context: * RSASSA-PKCS1-V1_5, in which case once RSA-decrypted, the
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1225
+    Algorithm: RSA
+    Context: // do rsa decryption w/o any decoding, then verify -- which does decoding
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1226
+    Algorithm: RSA
+    Context: var d = pki.rsa.decrypt(signature, key, true, false);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1234
+    Algorithm: RSA
+    Context: * Sets an RSA private key from BigIntegers modulus, exponent, primes,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1248
+    Algorithm: RSA
+    Context: pki.setRsaPrivateKey = pki.rsa.setPrivateKey = function(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1268
+    Algorithm: RSA
+    Context: *          'RSA-OAEP',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1269
+    Algorithm: RSA
+    Context: *          'RAW', 'NONE', or null to perform raw RSA decryption.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1281
+    Algorithm: RSA
+    Context: // do rsa decryption w/o any decoding
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1282
+    Algorithm: RSA
+    Context: var d = pki.rsa.decrypt(data, key, false, false);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1286
+    Algorithm: RSA
+    Context: } else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1322
+    Algorithm: RSA
+    Context: /* Note: The internal implementation of RSA operations is being
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1344
+    Algorithm: RSA
+    Context: return pki.rsa.encrypt(d, key, bt);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1489
+    Algorithm: RSA
+    Context: // get RSA params
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1556
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1634
+    Algorithm: RSA
+    Context: * @param key the RSA key to use.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1827
+    Algorithm: RSA
+    Context: privateKey: pki.rsa.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1831
+    Algorithm: RSA
+    Context: publicKey: pki.rsa.setPublicKey(state.n, state.e)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1942
+    Algorithm: RSA
+    Context: if(jwk.kty !== 'RSA') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1944
+    Algorithm: RSA
+    Context: 'Unsupported key algorithm "' + jwk.kty + '"; algorithm must be "RSA".');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1958
+    Algorithm: RSA
+    Context: if(jwk.kty !== 'RSA') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1959
+    Algorithm: RSA
+    Context: throw new Error('Key algorithm must be "RSA".');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\ssh.js
+
+    [!] CRITICAL | Line 21
+    Algorithm: RSA
+    Context: * Encodes (and optionally encrypts) a private RSA key as a Putty PPK file.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 32
+    Algorithm: RSA
+    Context: var algorithm = 'ssh-rsa';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 64
+    Algorithm: RSA
+    Context: // encrypt RSA key using passphrase
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 120
+    Algorithm: RSA
+    Context: * Encodes a public RSA key as an OpenSSH file.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 128
+    Algorithm: RSA
+    Context: var type = 'ssh-rsa';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 140
+    Algorithm: RSA
+    Context: * Encodes a private RSA key as an OpenSSH file.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 172
+    Algorithm: RSA
+    Context: var type = 'ssh-rsa';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\tls.js
+
+    [!] CRITICAL | Line 1303
+    Algorithm: RSA
+    Context: *   communicate the premaster secret: either an RSA public key to encrypt
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1309
+    Algorithm: RSA
+    Context: *   dhe_dss, dhe_rsa, dh_anon, rsa, dh_dss, dh_rsa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1330
+    Algorithm: RSA
+    Context: *     case rsa:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1342
+    Algorithm: RSA
+    Context: // this implementation only supports RSA, no Diffie-Hellman support
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1346
+    Algorithm: RSA
+    Context: message: 'Invalid key parameters. Only RSA is supported.',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1370
+    Algorithm: RSA
+    Context: // this implementation only supports RSA, no Diffie-Hellman support
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1374
+    Algorithm: RSA
+    Context: message: 'Invalid key parameters. Only RSA is supported.',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1388
+    Algorithm: RSA
+    Context: // do rsa decryption
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1432
+    Algorithm: RSA
+    Context: TLS server which is using PKCS#1 encoded RSA, so instead of
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1443
+    Algorithm: RSA
+    Context: // only RSA support, so expect CertificateVerify
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1551
+    Algorithm: RSA
+    Context: /*b = forge.pki.rsa.decrypt(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2959
+    Algorithm: RSA
+    Context: *   transmission of the RSA-encrypted secret, or by the transmission of
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2968
+    Algorithm: RSA
+    Context: *   If RSA is being used for key agreement and authentication, the client
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2970
+    Algorithm: RSA
+    Context: *   from the server's certificate or the temporary RSA key provided in a
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2977
+    Algorithm: RSA
+    Context: *     case rsa: EncryptedPreMasterSecret;
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3013
+    Algorithm: RSA
+    Context: // RSA-encrypt the pre-master secret
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3043
+    Algorithm: RSA
+    Context: // this implementation only supports RSA, no Diffie-Hellman support,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3066
+    Algorithm: RSA
+    Context: // generate data to RSA encrypt
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3074
+    Algorithm: RSA
+    Context: // do rsa encryption, call callback
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3145
+    Algorithm: RSA
+    Context: *   case rsa:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3161
+    Algorithm: RSA
+    Context: * In RSA signing, a 36-byte structure of two hashes (one SHA and one
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 3203
+    Algorithm: RSA
+    Context: // common RSA certificate type
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 4244
+    Algorithm: RSA
+    Context: *   and the RSA encrypted (signed) bytes as a string. This callback must
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\lib\x509.js
+
+    [!] CRITICAL | Line 79
+    Algorithm: RSA
+    Context: * The only key algorithm currently supported for PKI is RSA.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 119
+    Algorithm: RSA
+    Context: require('./rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 147
+    Algorithm: RSA
+    Context: // Note: Currently only works with an RSA public key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 148
+    Algorithm: RSA
+    Context: var publicKeyValidator = forge.pki.rsa.publicKeyValidator;
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 843
+    Algorithm: RSA
+    Context: * Converts an RSA public key from PEM format.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 852
+    Algorithm: RSA
+    Context: if(msg.type !== 'PUBLIC KEY' && msg.type !== 'RSA PUBLIC KEY') {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 854
+    Algorithm: RSA
+    Context: 'type is not "PUBLIC KEY" or "RSA PUBLIC KEY".');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 869
+    Algorithm: RSA
+    Context: * Converts an RSA public key to PEM format (using a SubjectPublicKeyInfo).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 886
+    Algorithm: RSA
+    Context: * Converts an RSA public key to PEM format (using an RSAPublicKey).
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 896
+    Algorithm: RSA
+    Context: type: 'RSA PUBLIC KEY',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1004
+    Algorithm: RSA
+    Context: * Creates an empty X.509v3 RSA certificate.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1262
+    Algorithm: RSA
+    Context: // as just using the RSAPublicKey (for RSA keys, which are the
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1290
+    Algorithm: RSA
+    Context: * Converts an X.509v3 RSA certificate from an ASN.1 object.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1297
+    Algorithm: RSA
+    Context: * @param obj the asn1 representation of an X.509v3 RSA certificate.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1316
+    Algorithm: RSA
+    Context: throw new Error('Cannot read public key. OID is not RSA.');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1415
+    Algorithm: RSA
+    Context: // convert RSA public key from ASN.1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1667
+    Algorithm: RSA
+    Context: throw new Error('Cannot read public key. OID is not RSA.');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1709
+    Algorithm: RSA
+    Context: // convert RSA public key from ASN.1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2530
+    Algorithm: RSA
+    Context: * Converts an X.509v3 RSA certificate to an ASN.1 object.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 2534
+    Algorithm: RSA
+    Context: * @return the asn1 representation of an X.509v3 RSA certificate.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\benchmarks\so-44303784.js
+
+    [W] HIGH | Line 72
+    Algorithm: AES-128
+    Context: const decipher = crypto.createDecipheriv('aes-128-cbc', keyb, ivb);
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\tests\karma\index.js
+
+    [!] CRITICAL | Line 8
+    Algorithm: RSA
+    Context: //require('./web-worker-rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\karma\testWorker.js
+
+    [!] CRITICAL | Line 1
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 32
+    Algorithm: RSA
+    Context: case 'rsa.generateKeyPair':
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 34
+    Algorithm: RSA
+    Context: //RSA.generateKeyPair({bits: 512, workers: -1}, function(error, keyPair) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 35
+    Algorithm: RSA
+    Context: RSA.generateKeyPair({bits: 512, workers: 1}, function(error, keyPair) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\karma\web-worker-rsa.js
+
+    [!] CRITICAL | Line 13
+    Algorithm: RSA
+    Context: describe('web worker rsa', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 15
+    Algorithm: RSA
+    Context: // Make test worker call rsa.generateKeyPair() on its own side
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 17
+    Algorithm: RSA
+    Context: testWorker.postMessage({type: 'rsa.generateKeyPair'});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\legacy\common.js
+
+    [!] CRITICAL | Line 101
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(bits);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 102
+    Algorithm: RSA
+    Context: forge.log.debug(cat, 'generating ' + bits + '-bit RSA key-pair...');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 133
+    Algorithm: RSA
+    Context: '-bit RSA key-pair and certificate...');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 138
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(bits);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1292
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1306
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1359
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1373
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1664
+    Algorithm: RSA
+    Context: var state = forge.pki.rsa.createKeyPairGenerationState(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1669
+    Algorithm: RSA
+    Context: if(!forge.pki.rsa.stepKeyPairGenerationState(state, 1000))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 722
+    Algorithm: AES-128
+    Context: addTest('aes-128 encrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 759
+    Algorithm: AES-128
+    Context: addTest('aes-128 decrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1000
+    Algorithm: AES-128
+    Context: addTest('aes-128 cbc encrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1012
+    Algorithm: AES-128
+    Context: addTest('aes-128 cbc decrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1079
+    Algorithm: AES-128
+    Context: addTest('aes-128 cfb encrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1091
+    Algorithm: AES-128
+    Context: addTest('aes-128 cfb decrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1197
+    Algorithm: AES-128
+    Context: addTest('aes-128 ofb encrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1209
+    Algorithm: AES-128
+    Context: addTest('aes-128 ofb decrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1260
+    Algorithm: AES-128
+    Context: addTest('aes-128 ctr encrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1272
+    Algorithm: AES-128
+    Context: addTest('aes-128 ctr decrypt', function(task, test)
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\tests\legacy\webid.js
+
+    [!] CRITICAL | Line 46
+    Algorithm: RSA
+    Context: '-bit RSA key-pair and certificate...');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 153
+    Algorithm: RSA
+    Context: var state = forge.pki.rsa.createKeyPairGenerationState(bits);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 158
+    Algorithm: RSA
+    Context: if(!forge.pki.rsa.stepKeyPairGenerationState(state, 1000))
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\legacy\ws-webid.js
+
+    [!] CRITICAL | Line 6
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\pocs\ghsa-2328-f5f3-gj25.js
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: return pki.rsa.generateKeyPair({ bits: 2048, e: 0x10001 });
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\pocs\ghsa-ppp5-5v6c-4jwp.js
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: // Test vectors from this code were added in the RSA unit tests.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 80
+    Algorithm: RSA
+    Context: const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\pocs\ghsa-q67f-28xg-22rw.js
+
+    [W] HIGH | Line 11
+    Algorithm: Ed25519
+    Context: // Test vectors from this code were added in the ed25519 unit tests.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 16
+    Algorithm: Ed25519
+    Context: const ed = forge.ed25519;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 20
+    Algorithm: Ed25519
+    Context: // Ed25519 group order L encoded as 32 bytes, little-endian (RFC 8032).
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 28
+    Algorithm: Ed25519
+    Context: // For Ed25519 signatures, s is the last 32 bytes of the 64-byte signature.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 49
+    Algorithm: Ed25519
+    Context: // Builds an ASN.1 SubjectPublicKeyInfo for Ed25519 (RFC 8410) and returns PEM.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\tests\security\cve-2025-12816.js
+
+    [!] CRITICAL | Line 13
+    Algorithm: RSA
+    Context: var keys = pki.rsa.generateKeyPair({bits: 1024, e: 0x10001});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\aes.js
+
+    [W] HIGH | Line 118
+    Algorithm: AES-128
+    Context: // AES-128-ECB
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 147
+    Algorithm: AES-128
+    Context: it('should aes-128-ecb encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 157
+    Algorithm: AES-128
+    Context: it('should aes-128-ecb decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 274
+    Algorithm: AES-128
+    Context: // AES-128-CBC
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 319
+    Algorithm: AES-128
+    Context: it('should aes-128-cbc encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 329
+    Algorithm: AES-128
+    Context: it('should aes-128-cbc decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 465
+    Algorithm: AES-128
+    Context: // AES-128-CFB
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 512
+    Algorithm: AES-128
+    Context: it('should aes-128-cfb encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 521
+    Algorithm: AES-128
+    Context: it('should aes-128-cfb decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 532
+    Algorithm: AES-128
+    Context: it('should aes-128-cfb encrypt (one byte at a time): ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 547
+    Algorithm: AES-128
+    Context: it('should aes-128-cfb decrypt (one byte at a time): ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 672
+    Algorithm: AES-128
+    Context: // AES-128-OFB
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 707
+    Algorithm: AES-128
+    Context: it('should aes-128-ofb encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 716
+    Algorithm: AES-128
+    Context: it('should aes-128-ofb decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 727
+    Algorithm: AES-128
+    Context: it('should aes-128-ofb encrypt (one byte at a time): ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 742
+    Algorithm: AES-128
+    Context: it('should aes-128-ofb decrypt (one byte at a time): ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 879
+    Algorithm: AES-128
+    Context: // AES-128-CTR
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 914
+    Algorithm: AES-128
+    Context: it('should aes-128-ctr encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 923
+    Algorithm: AES-128
+    Context: it('should aes-128-ctr decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 934
+    Algorithm: AES-128
+    Context: it('should aes-128-ctr encrypt (one byte at a time): ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 949
+    Algorithm: AES-128
+    Context: it('should aes-128-ctr decrypt (one byte at a time): ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1074
+    Algorithm: AES-128
+    Context: // AES-128-GCM
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1182
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1192
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1207
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm encrypt (one byte at a time): ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1223
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm encrypt (blockSize/2+1 bytes at a time): ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1342
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm encrypt: ' + inputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 1352
+    Algorithm: AES-128
+    Context: it('should aes-128-gcm decrypt: ' + outputs[i], function() {
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\tests\unit\csr.js
+
+    [!] CRITICAL | Line 6
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 20
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\ed25519.js
+
+    [W] HIGH | Line 2
+    Algorithm: Ed25519
+    Context: var ED25519 = require('../../lib/ed25519');
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 2
+    Algorithm: Ed25519
+    Context: var ED25519 = require('../../lib/ed25519');
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 21
+    Algorithm: Ed25519
+    Context: describe('ed25519', function() {
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 27
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 36
+    Algorithm: Ed25519
+    Context: var publicKey = ED25519.publicKeyFromPrivateKey({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 43
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 53
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 56
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 68
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 72
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 84
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 85
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 98
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 99
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 112
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 113
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 125
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 131
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 144
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 145
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 158
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 162
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 176
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 182
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 196
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 200
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 211
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 215
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 221
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 236
+    Algorithm: Ed25519
+    Context: var kp = ED25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 240
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 251
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 259
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 281
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 285
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 308
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 312
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 336
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 340
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 363
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 373
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\tests\unit\index.js
+
+    [!] CRITICAL | Line 15
+    Algorithm: RSA
+    Context: require('./rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 12
+    Algorithm: Ed25519
+    Context: require('./ed25519');
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\tests\unit\kem.js
+
+    [!] CRITICAL | Line 4
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 4
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 22
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 24
+    Algorithm: RSA
+    Context: var pair = RSA.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 36
+    Algorithm: RSA
+    Context: * According to section "C.6 Test vectors for RSA-KEM" from ISO-18033-2 final
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 39
+    Algorithm: RSA
+    Context: describe('C.6 Test vectors for RSA-KEM from ISO-18033-2 final', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 50
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf, {prng: rnd});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 52
+    Algorithm: RSA
+    Context: var rsaPublicKey = RSA.setPublicKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 54
+    Algorithm: RSA
+    Context: var rsaPrivateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 75
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf, {prng: rnd});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 77
+    Algorithm: RSA
+    Context: var rsaPublicKey = RSA.setPublicKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 79
+    Algorithm: RSA
+    Context: var rsaPrivateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 100
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf, {prng: rnd});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 102
+    Algorithm: RSA
+    Context: var rsaPublicKey = RSA.setPublicKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 104
+    Algorithm: RSA
+    Context: var rsaPrivateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 125
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf, {prng: rnd});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 127
+    Algorithm: RSA
+    Context: var rsaPublicKey = RSA.setPublicKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 129
+    Algorithm: RSA
+    Context: var rsaPrivateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 152
+    Algorithm: RSA
+    Context: var kem = KEM.rsa.create(kdf, {prng: rnd});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 154
+    Algorithm: RSA
+    Context: var rsaPublicKey = RSA.setPublicKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 156
+    Algorithm: RSA
+    Context: var rsaPrivateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\pem.js
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: 'Key-Info: DES-ECB,RSA-MD2,9FD3AAD2F2691B9A,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 14
+    Algorithm: RSA
+    Context: 'Key-Info: DES-ECB,RSA-MD2,161A3F75DC82EF26,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 36
+    Algorithm: RSA
+    Context: 'Key-Info: RSA,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 50
+    Algorithm: RSA
+    Context: 'MIC-Info: RSA-MD5,RSA,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 50
+    Algorithm: RSA
+    Context: 'MIC-Info: RSA-MD5,RSA,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 56
+    Algorithm: RSA
+    Context: 'Key-Info: RSA,\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 63
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 71
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\pkcs1.js
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: // RSA's test vectors for Forge's RSA-OAEP implementation:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 11
+    Algorithm: RSA
+    Context: // RSA's test vectors for Forge's RSA-OAEP implementation:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 12
+    Algorithm: RSA
+    Context: // http://www.rsa.com/rsalabs/node.asp?id=2125
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 68
+    Algorithm: RSA
+    Context: // Example 1: A 1024-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 69
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 114
+    Algorithm: RSA
+    Context: // Example 2: A 1025-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 115
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 160
+    Algorithm: RSA
+    Context: // Example 3: A 1026-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 161
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 206
+    Algorithm: RSA
+    Context: // Example 4: A 1027-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 207
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 252
+    Algorithm: RSA
+    Context: // Example 5: A 1028-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 253
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 298
+    Algorithm: RSA
+    Context: // Example 6: A 1029-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 299
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 344
+    Algorithm: RSA
+    Context: // Example 7: A 1030-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 345
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 390
+    Algorithm: RSA
+    Context: // Example 8: A 1031-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 391
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 436
+    Algorithm: RSA
+    Context: // Example 9: A 1536-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 437
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 482
+    Algorithm: RSA
+    Context: // Example 10: A 2048-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 483
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 533
+    Algorithm: RSA
+    Context: // Example 1: A 1024-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 534
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 579
+    Algorithm: RSA
+    Context: // Example 2: A 1025-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 580
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 625
+    Algorithm: RSA
+    Context: // Example 3: A 1026-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 626
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 671
+    Algorithm: RSA
+    Context: // Example 4: A 1027-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 672
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 719
+    Algorithm: RSA
+    Context: // Example 5: A 1028-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 720
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 765
+    Algorithm: RSA
+    Context: // Example 6: A 1029-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 766
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 811
+    Algorithm: RSA
+    Context: // Example 7: A 1030-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 812
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 857
+    Algorithm: RSA
+    Context: // Example 8: A 1031-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 858
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 903
+    Algorithm: RSA
+    Context: // Example 9: A 1536-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 904
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 949
+    Algorithm: RSA
+    Context: // Example 10: A 2048-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 950
+    Algorithm: RSA
+    Context: // Components of the RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1036
+    Algorithm: RSA
+    Context: ciphertext = publicKey.encrypt(message, 'RSA-OAEP', {md: md});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1037
+    Algorithm: RSA
+    Context: decoded = privateKey.decrypt(ciphertext, 'RSA-OAEP', {md: md});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1062
+    Algorithm: RSA
+    Context: // Example 1: A 1024-bit RSA Key Pair
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\pkcs12.js
+
+    [!] CRITICAL | Line 388
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 414
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 271
+    Algorithm: ECDSA
+    Context: it('should load a PKCS#12 with an ECDSA key in a certificate (unsupported key format)', function() {
+    Threat: Shor's algorithm solves elliptic curve discrete logarithm
+    Migrate to: ML-DSA-65
+
+[*] node-forge\tests\unit\pkcs7.js
+
+    [!] CRITICAL | Line 51
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 77
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 505
+    Algorithm: RSA
+    Context: // RSA encryption should yield 256 bytes
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 546
+    Algorithm: RSA
+    Context: // RSA encryption should yield 256 bytes
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\rsa.js
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: var RSA = require('../../lib/rsa');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 14
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 28
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 58
+    Algorithm: RSA
+    Context: describe('rsa', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 62
+    Algorithm: RSA
+    Context: ASSERT.equal(PKI.privateKeyToPem(pair.privateKey).indexOf('-----BEGIN RSA PRIVATE KEY-----'), 0);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 100
+    Algorithm: RSA
+    Context: pair = RSA.generateKeyPair(512, {prng: _samePrng()});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 102
+    Algorithm: RSA
+    Context: pair = RSA.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 124
+    Algorithm: RSA
+    Context: RSA.generateKeyPair(genOptions, function(err, pair) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 375
+    Algorithm: RSA
+    Context: privateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 392
+    Algorithm: RSA
+    Context: privateKey = RSA.setPrivateKey(
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 405
+    Algorithm: RSA
+    Context: privateKeyPem: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 419
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 433
+    Algorithm: RSA
+    Context: privateKeyPem: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 447
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 461
+    Algorithm: RSA
+    Context: privateKeyPem: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 475
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 489
+    Algorithm: RSA
+    Context: privateKeyPem: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 503
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 542
+    Algorithm: RSA
+    Context: * Creates RSA encryption & decryption tests.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 551
+    Algorithm: RSA
+    Context: * openssl rsa -in rsa_1024_private.pem -out rsa_1024_public.pem \
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 574
+    Algorithm: RSA
+    Context: it('should rsa encrypt using a ' + keySize + '-bit key', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 590
+    Algorithm: RSA
+    Context: it('should rsa decrypt using a ' + keySize + '-bit key', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 596
+    Algorithm: RSA
+    Context: it('should rsa sign using a ' + keySize + '-bit key and PKCS#1 v1.5 padding', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 607
+    Algorithm: RSA
+    Context: it('should verify an rsa signature using a ' + keySize + '-bit key and PKCS#1 v1.5 padding', functio
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 622
+    Algorithm: RSA
+    Context: it('should rsa sign using a ' + keySize + '-bit key and PSS padding', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 642
+    Algorithm: RSA
+    Context: it('should verify an rsa signature using a ' + keySize + '-bit key and PSS padding', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 656
+    Algorithm: RSA
+    Context: it('should rsa sign using a ' + keySize + '-bit key and PSS padding using pss named-param API', func
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 679
+    Algorithm: RSA
+    Context: it('should verify an rsa signature using a ' + keySize + '-bit key and PSS padding using pss named-p
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 696
+    Algorithm: RSA
+    Context: it('should rsa sign using a ' + keySize + '-bit key and PSS padding using salt "abc"', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 714
+    Algorithm: RSA
+    Context: it('should verify an rsa signature using a ' + keySize + '-bit key and PSS padding using salt "abc"'
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 731
+    Algorithm: RSA
+    Context: it('should rsa sign using a ' + keySize + '-bit key and PSS padding using custom PRNG', function() {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 754
+    Algorithm: RSA
+    Context: it('should verify an rsa signature using a ' + keySize + '-bit key and PSS padding using custom PRNG
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 825
+    Algorithm: RSA
+    Context: // to-be-signed RSA PKCS#1 v1.5 signature scheme input structure
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 867
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 871
+    Algorithm: RSA
+    Context: // See "Bleichenbacher's RSA signature forgery based on implementation
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 900
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 929
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 976
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1009
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1071
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1112
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1138
+    Algorithm: RSA
+    Context: var publicKey = RSA.setPublicKey(N, e);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1167
+    Algorithm: RSA
+    Context: var publicKeyPem = '-----BEGIN RSA PUBLIC KEY-----\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1179
+    Algorithm: RSA
+    Context: '-----END RSA PUBLIC KEY-----\n';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\ssh.js
+
+    [!] CRITICAL | Line 7
+    Algorithm: RSA
+    Context: // Original RSA key generated by openssh
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 35
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 42
+    Algorithm: RSA
+    Context: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfTU74sGd3qeDD2LQ9vmJPCVD' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 55
+    Algorithm: RSA
+    Context: 'PuTTY-User-Key-File-2: ssh-rsa\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 87
+    Algorithm: RSA
+    Context: 'PuTTY-User-Key-File-2: ssh-rsa\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 119
+    Algorithm: RSA
+    Context: '-----BEGIN RSA PRIVATE KEY-----\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 148
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\n';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 121
+    Algorithm: AES-128
+    Context: 'DEK-Info: AES-128-CBC,2616162F269429AA628E42C3BD5A0027\n' +
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+[*] node-forge\tests\unit\tls.js
+
+    [!] CRITICAL | Line 121
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\unit\x509.js
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 23
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 52
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 78
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 115
+    Algorithm: RSA
+    Context: privateKey: '-----BEGIN RSA PRIVATE KEY-----\r\n' +
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 141
+    Algorithm: RSA
+    Context: '-----END RSA PRIVATE KEY-----\r\n',
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1537
+    Algorithm: RSA
+    Context: return PKI.rsa.generateKeyPair({bits: 2048, e: 0x10001});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\websockets\server-webid.js
+
+    [!] CRITICAL | Line 68
+    Algorithm: RSA
+    Context: //var RSA  = rdf.Namespace('http://www.w3.org/ns/auth/rsa#');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 68
+    Algorithm: RSA
+    Context: //var RSA  = rdf.Namespace('http://www.w3.org/ns/auth/rsa#');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 71
+    Algorithm: RSA
+    Context: var RSA = 'http://www.w3.org/ns/auth/rsa#';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 71
+    Algorithm: RSA
+    Context: var RSA = 'http://www.w3.org/ns/auth/rsa#';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 76
+    Algorithm: RSA
+    Context: var publicKey = RSA + 'RSAPublicKey';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 77
+    Algorithm: RSA
+    Context: var modulus = RSA + 'modulus';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 78
+    Algorithm: RSA
+    Context: var exponent = RSA + 'public_exponent';
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 297
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\tests\websockets\server-ws.js
+
+    [!] CRITICAL | Line 9
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(512);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+[*] node-forge\CHANGELOG.md
+
+    [!] CRITICAL | Line 16
+    Algorithm: RSA
+    Context: - **HIGH**: Signature forgery in RSA-PKCS due to ASN.1 extra field.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 68
+    Algorithm: RSA
+    Context: - [rsa] Fix padding length check according to RFC 2313 8.1 note 6. Padding is
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 70
+    Algorithm: RSA
+    Context: - [rsa] Fix RFC 8017 DigestInfo parsing to require a sequence length of two.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 140
+    Algorithm: RSA
+    Context: - Three RSA PKCS#1 v1.5 signature verification issues were reported by Moosa
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 148
+    Algorithm: RSA
+    Context: ["Bleichenbacher's RSA signature forgery based on implementation
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 158
+    Algorithm: RSA
+    Context: being used.  For more information, please see ["Bleichenbacher's RSA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 179
+    Algorithm: RSA
+    Context: - [rsa] Add and use a validator to check for proper structure of parsed ASN.1
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 211
+    Algorithm: RSA
+    Context: RSA. Considered a deprecated equivalent to `1.2.840.113549.1.1.5 /
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 380
+    Algorithm: RSA
+    Context: - `rsa.generateKeyPair`:
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 383
+    Algorithm: RSA
+    Context: - Use JS fallback in `rsa.generateKeyPair` if `prng` option specified since
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 484
+    Algorithm: RSA
+    Context: - Add rsa.generateKeyPair async and usePureJavaScript tests.
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 30
+    Algorithm: Ed25519
+    Context: - **HIGH**: Signature forgery in Ed25519 due to missing S < L check.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 31
+    Algorithm: Ed25519
+    Context: - Ed25519 signature verification accepts forged non-canonical signatures
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 71
+    Algorithm: Ed25519
+    Context: - [ed25519] Add canonical signature scaler check for S < L.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 325
+    Algorithm: Ed25519
+    Context: - Add ed25519.publicKeyFromAsn1 and ed25519.privateKeyFromAsn1 APIs.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 325
+    Algorithm: Ed25519
+    Context: - Add ed25519.publicKeyFromAsn1 and ed25519.privateKeyFromAsn1 APIs.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 329
+    Algorithm: Ed25519
+    Context: - Improve ed25519 NativeBuffer check.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 415
+    Algorithm: Ed25519
+    Context: - Support for ED25519.
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+[*] node-forge\README.md
+
+    [!] CRITICAL | Line 57
+    Algorithm: RSA
+    Context: * [RSA](#rsa)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 57
+    Algorithm: RSA
+    Context: * [RSA](#rsa)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 58
+    Algorithm: RSA
+    Context: * [RSA-KEM](#rsakem)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 568
+    Algorithm: RSA
+    Context: // encodes (and optionally encrypts) a private RSA key as a Putty PPK file
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 571
+    Algorithm: RSA
+    Context: // encodes a public RSA key as an OpenSSH file
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 574
+    Algorithm: RSA
+    Context: // encodes a private RSA key as an OpenSSH file
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 853
+    Algorithm: RSA
+    Context: signing/verifying, and RSA public and private key encoding, decoding,
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 939
+    Algorithm: RSA
+    Context: <a name="rsa" />
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 941
+    Algorithm: RSA
+    Context: ### RSA
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 946
+    Algorithm: RSA
+    Context: var rsa = forge.pki.rsa;
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 946
+    Algorithm: RSA
+    Context: var rsa = forge.pki.rsa;
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 948
+    Algorithm: RSA
+    Context: // generate an RSA key pair synchronously
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 951
+    Algorithm: RSA
+    Context: var keypair = rsa.generateKeyPair({bits: 2048, e: 0x10001});
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 953
+    Algorithm: RSA
+    Context: // generate an RSA key pair asynchronously (uses web workers if available)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 957
+    Algorithm: RSA
+    Context: rsa.generateKeyPair({bits: 2048, workers: 2}, function(err, keypair) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 961
+    Algorithm: RSA
+    Context: // generate an RSA key pair in steps that attempt to run for a specified period
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 963
+    Algorithm: RSA
+    Context: var state = rsa.createKeyPairGenerationState(2048, 0x10001);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 966
+    Algorithm: RSA
+    Context: if(!rsa.stepKeyPairGenerationState(state, 100)) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1023
+    Algorithm: RSA
+    Context: var encrypted = publicKey.encrypt(bytes, 'RSA-OAEP');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1026
+    Algorithm: RSA
+    Context: var decrypted = privateKey.decrypt(encrypted, 'RSA-OAEP');
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1029
+    Algorithm: RSA
+    Context: var encrypted = publicKey.encrypt(bytes, 'RSA-OAEP', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1034
+    Algorithm: RSA
+    Context: var decrypted = privateKey.decrypt(encrypted, 'RSA-OAEP', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1039
+    Algorithm: RSA
+    Context: // compatible with Java's RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1040
+    Algorithm: RSA
+    Context: var encrypted = publicKey.encrypt(bytes, 'RSA-OAEP', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1048
+    Algorithm: RSA
+    Context: // compatible with Java's RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1049
+    Algorithm: RSA
+    Context: var decrypted = privateKey.decrypt(encrypted, 'RSA-OAEP', {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1060
+    Algorithm: RSA
+    Context: ### RSA-KEM
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1065
+    Algorithm: RSA
+    Context: // generate an RSA key pair asynchronously (uses web workers if available)
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1067
+    Algorithm: RSA
+    Context: forge.rsa.generateKeyPair({bits: 2048, workers: -1}, function(err, keypair) {
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1073
+    Algorithm: RSA
+    Context: var kem = forge.kem.rsa.create(kdf1);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1091
+    Algorithm: RSA
+    Context: var kem = forge.kem.rsa.create(kdf1);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1173
+    Algorithm: RSA
+    Context: var keys = pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1427
+    Algorithm: RSA
+    Context: // sets an RSA public key from a private key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1442
+    Algorithm: RSA
+    Context: var keys = forge.pki.rsa.generateKeyPair(2048);
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [!] CRITICAL | Line 1697
+    Algorithm: RSA
+    Context: // capture.rsaPublicKey contains the full ASN.1 object for the RSA public key
+    Threat: Shor's algorithm factors large integers exponentially faster
+    Migrate to: ML-KEM-768 or ML-DSA-65
+
+    [W] HIGH | Line 56
+    Algorithm: Ed25519
+    Context: * [ED25519](#ed25519)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 56
+    Algorithm: Ed25519
+    Context: * [ED25519](#ed25519)
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 852
+    Algorithm: Ed25519
+    Context: Provides [X.509][] certificate support, ED25519 key generation and
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 856
+    Algorithm: Ed25519
+    Context: <a name="ed25519" />
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 858
+    Algorithm: Ed25519
+    Context: ### ED25519
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 865
+    Algorithm: Ed25519
+    Context: var ed25519 = forge.pki.ed25519;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 865
+    Algorithm: Ed25519
+    Context: var ed25519 = forge.pki.ed25519;
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 867
+    Algorithm: Ed25519
+    Context: // generate a random ED25519 keypair
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 868
+    Algorithm: Ed25519
+    Context: var keypair = ed25519.generateKeyPair();
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 872
+    Algorithm: Ed25519
+    Context: // generate a random ED25519 keypair based on a random 32-byte seed
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 874
+    Algorithm: Ed25519
+    Context: var keypair = ed25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 876
+    Algorithm: Ed25519
+    Context: // generate a random ED25519 keypair based on a "password" 32-byte seed
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 879
+    Algorithm: Ed25519
+    Context: var keypair = ed25519.generateKeyPair({seed: seed});
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 882
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 892
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 901
+    Algorithm: Ed25519
+    Context: var signature = ED25519.sign({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 907
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 918
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 930
+    Algorithm: Ed25519
+    Context: var verified = ED25519.verify({
+    Threat: Vulnerable to Shor's algorithm on Edwards curves
+    Migrate to: SLH-DSA or FALCON
+
+    [W] HIGH | Line 633
+    Algorithm: AES-128
+    Context: AES-128, AES-192, or AES-256 is used (all are supported). When a [DES][]
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+    [W] HIGH | Line 641
+    Algorithm: AES-128
+    Context: // Note: a key size of 16 bytes will use AES-128, 24 => AES-192, 32 => AES-256
+    Threat: Grover's algorithm reduces effective key size to 64 bits
+    Migrate to: AES-256
+
+============================================================
+SUMMARY: 54 files affected | 568 total risks
+
+[!!!] CRITICAL: 403 quantum-vulnerable findings!
+    Immediate migration to NIST PQC standards required.
+============================================================
